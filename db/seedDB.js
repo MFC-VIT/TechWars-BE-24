@@ -82,8 +82,8 @@ export const seedQuestions = async (lobby_id, rounds, quesPerRound)=>{
   }
 }
 
-// tempSeedTeams();
-seedQuestions("123", 5, 5);
+tempSeedTeams().then(()=>seedQuestions("123", 5, 5))
+// seedQuestions("123", 5, 5);
 
 // for demo, assuming 2 teams, then 5 questions each. (total of 10 ques in db)
 // const seedQuestions = async ()=>{

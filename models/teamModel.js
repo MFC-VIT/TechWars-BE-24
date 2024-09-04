@@ -17,6 +17,7 @@ const  teamSchema = new mongoose.Schema({
     required:true
   },
   questions: [{
+    id: String,
     question: String,
     options: [String],
     answer: String,
