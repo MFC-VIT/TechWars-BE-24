@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean } from "zod";
 const  teamSchema = new mongoose.Schema({
   territory_id:[{
     type:mongoose.Schema.ObjectId,
@@ -15,10 +16,15 @@ const  teamSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  questionsAnswered: {
-    type: Number,
-    default: 0
-  },
+  questions: [{
+    question: String,
+    options: [String],
+    answer: String,
+    isAnswered: {
+      type: Boolean,
+      default: false
+    }
+  }],
   score:{
     type: Number,
     default: 0
