@@ -24,7 +24,8 @@ const  teamSchema = new mongoose.Schema({
     state: {
       type: Boolean,
       default: false
-    }
+    },
+    points: Number,
   }],
   score:{
     type: Number,

@@ -5,4 +5,6 @@ const router = Router();
 
 router.route("/questions/:lobbyId/:teamId").get(verifyLobbyExists, verifyTeamExists, getQuestions)
 
+// router.route("/verify/:lobbyId/:teamId/:quesId").post(verifyLobbyExists, verifyTeamExists, verifyAnswer)
+
 export default router;

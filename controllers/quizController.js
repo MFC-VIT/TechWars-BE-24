@@ -16,7 +16,7 @@ export const getQuestions = async (req, res, next)=>{
       lobby_id: lobbyId
     });
     const questions = getNQuestions(questCount, team.questions).map(
-      ({ id, question, options, answer })=>({id, question, options, answer })
+      ({ _id, question, options })=>({ _id, question, options })
     );
     return res.status(200).json({
       questions,
@@ -26,3 +26,21 @@ export const getQuestions = async (req, res, next)=>{
     next(error);
   }
 }
+
+// export const verifyAnswer = async (req, res, next)=>{
+//   const lobbyId = req.params.lobbyId;
+//   const teamId = req.params.teamsId;
+//   const quesId = req.params.quesId;
+//   const { answer } = req.body;
+//   try {
+//     const team = await teamModel.findOne({
+//       _id: teamId,
+//       lobby_id: lobbyId
+//     });
+//     // console.log(team);
+//     // console.log(team.questions);
+//     const question = team.questions.find({ _id: quesId });
+//   } catch(error){
+//     next(error);
+//   }
+// }

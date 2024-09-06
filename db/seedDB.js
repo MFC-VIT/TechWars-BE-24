@@ -58,6 +58,8 @@ const tempSeedTeams = async ()=>{
 
   } catch(error){
     console.error("Error seeding questions:", error);
+  } finally {
+    mongoose.connection.close();
   }
 }
 
@@ -67,6 +69,9 @@ export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
       lobby_id: lobbyId
     })
     for (const team of teamsInLobby){
+      if (team.questions.length){
+        team.questions = [];
+      }
       const questionsForThisTeam = getNQuestions(rounds*quesPerRound, questions);
       team.questions = questionsForThisTeam;
       await team.save();
@@ -78,8 +83,8 @@ export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
   }
 }
 
-// tempSeedTeams().then(()=>seedQuestions("123", 5, 5))
-seedQuestions("66da57ac9b1a6e673f53f924", 5, 5);
+// await tempSeedTeams();
+await seedQuestions("66da602e1599b492c4b64dd8", 5, 5);
 
 // for demo, assuming 2 teams, then 5 questions each. (total of 10 ques in db)
 // const seedQuestions = async ()=>{
