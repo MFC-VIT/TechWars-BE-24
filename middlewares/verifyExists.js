@@ -6,11 +6,12 @@ export const verifyTeamExists = async (req, res, next)=>{
   try {
     const team = await teamModel.findById(teamId);
     if (!team){
-      next(new Error("Team does not exist."));
+      return next(new Error("Team does not exist."));
     } 
+    req.teamId = teamId;
     next();
   } catch(error){
-    next(error);
+    return next(error);
   }
 }
 
@@ -19,10 +20,11 @@ export const verifyLobbyExists = async (req, res, next)=>{
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     if (!lobby){
-      next(new Error("Lobby does not exist."));
+      return next(new Error("Lobby does not exist."));
     }
+    req.lobbyId = lobbyId;
     next();
   } catch(error){
-    next(error);
+    return next(error);
   }
 }

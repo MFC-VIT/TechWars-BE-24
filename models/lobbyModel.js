@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { gameStates } from "../constants.js";
 
 const lobbySchema = new mongoose.Schema({
   name: {
@@ -10,7 +11,7 @@ const lobbySchema = new mongoose.Schema({
     type: Number,
   },
   // userPresent: [User],
-  allUsers: [{
+  allTeams: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "team"
   }],
@@ -22,10 +23,13 @@ const lobbySchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  state: {
+    type: String,
+    enum: Object.values(gameStates),
+    default: gameStates.idle,
+    required: true
+  },
   whosAttack: {},
-  isQuiz: {},
-  isAttack: {},
-  isTraining: {},
   nextRoundTime: {},
   isQuizTime: {},
   isAttackTime: {},

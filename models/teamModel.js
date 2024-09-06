@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { boolean } from "zod";
+import { gameStates, questionStates } from "../constants.js";
 const  teamSchema = new mongoose.Schema({
   territory_id:[{
     type:mongoose.Schema.ObjectId,
@@ -16,14 +17,21 @@ const  teamSchema = new mongoose.Schema({
     type:String,
     required:true
   },
+  state: {
+    type: String,
+    enum: Object.values(gameStates),
+    default: gameStates.idle,
+    required: true
+  },
   questions: [{
     id: String,
     question: String,
     options: [String],
     answer: String,
     state: {
-      type: Boolean,
-      default: false
+      type: String,
+      enum: Object.values(questionStates),
+      default: questionStates.notAttempted,
     },
     points: Number,
   }],
