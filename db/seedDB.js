@@ -3,9 +3,11 @@
  */
 import mongoose from "mongoose"
 import teamModel from "../models/teamModel.js"
-import questionModel from "../models/questionsModel.js"
+// import questionModel from "../models/questionsModel.js"
 import { questions } from "../questions.js"
 import "dotenv/config"
+import { getNQuestions } from "../functions.js"
+import lobbyModel from "../models/lobbyModel.js"
 
 mongoose.connect(process.env.MONGO_URI)
 
@@ -15,60 +17,54 @@ const tempSeedTeams = async ()=>{
     if (teams.length != 0){
       return;
     }
+    const lobby = await lobbyModel.create({ name: "ninja-family" });
     const tempTeams = [
       {
         team_name: "Red-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       {
         team_name: "Blue-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       {
         team_name: "Gray-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       {
         team_name: "Black-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       {
         team_name: "Neon-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       {
         team_name: "Gold-Ninja",
-        lobby_id: "123",
+        lobby_id: lobby._id,
         password: "Hello-Ninja"
       },
       
     ];
     await teamModel.insertMany(tempTeams);
+    const allUsers = await teamModel.find({ lobby_id: lobby._id });
+    lobby.allUsers = allUsers.map((user)=>user._id);
+    await lobby.save();
+
   } catch(error){
     console.error("Error seeding questions:", error);
   }
 }
 
-const getNQuestions = (quesCount, quesList)=>{
-  if (quesCount >= quesList.length) return quesList;  // edge case
-  const startIndex = Math.floor(Math.random()*quesCount);
-  const questions = [];
-  for (let i = startIndex; i < startIndex+quesCount; i++){
-    const iterator = i >= quesList.length ? i - quesList.length : i;
-    questions.push(quesList[iterator]);
-  }
-  return questions;
-}
-
-export const seedQuestions = async (lobby_id, rounds, quesPerRound)=>{
+export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
   try {
     const teamsInLobby = await teamModel.find({
-      lobby_id
+      lobby_id: lobbyId
     })
     for (const team of teamsInLobby){
       const questionsForThisTeam = getNQuestions(rounds*quesPerRound, questions);
@@ -82,8 +78,8 @@ export const seedQuestions = async (lobby_id, rounds, quesPerRound)=>{
   }
 }
 
-tempSeedTeams().then(()=>seedQuestions("123", 5, 5))
-// seedQuestions("123", 5, 5);
+// tempSeedTeams().then(()=>seedQuestions("123", 5, 5))
+seedQuestions("66da57ac9b1a6e673f53f924", 5, 5);
 
 // for demo, assuming 2 teams, then 5 questions each. (total of 10 ques in db)
 // const seedQuestions = async ()=>{

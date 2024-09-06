@@ -21,7 +21,7 @@ const  teamSchema = new mongoose.Schema({
     question: String,
     options: [String],
     answer: String,
-    isAnswered: {
+    state: {
       type: Boolean,
       default: false
     }

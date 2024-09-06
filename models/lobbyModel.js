@@ -1,56 +1,35 @@
-const { Int32 } = require("bson");
-const mongoose = require("mongoose");
-const  User = require('./teamModel');
+import mongoose from "mongoose";
 
 const lobbySchema = new mongoose.Schema({
-    lobby_id:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    userCount:{
-        type:Number
-    },
-    userPresent:[User],
-    allUsers:[String],
-    territoryId: { 
-        type: String,
-        default: null
-    },
-    roundsOver: { 
-        type: Boolean, 
-        default: false 
-    },
-    whosAttack:{
-
-    },
-    isQuiz:{
-
-    },
-    isAttack:{
-
-    },
-    isTraining:{
-
-    },
-    nextRoundTime:{
-
-    },
-    isQuizTime:{
-
-    },
-    isAttackTime:{
-
-    },
-    isTrainingTime:{
-
-    },
-    
-
-
-
-
-
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  userCount: {
+    type: Number,
+  },
+  // userPresent: [User],
+  allUsers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "team"
+  }],
+  territoryId: {
+    type: String,
+    default: null,
+  },
+  roundsOver: {
+    type: Boolean,
+    default: false,
+  },
+  whosAttack: {},
+  isQuiz: {},
+  isAttack: {},
+  isTraining: {},
+  nextRoundTime: {},
+  isQuizTime: {},
+  isAttackTime: {},
+  isTrainingTime: {},
 });
 
-module.exports = mongoose.model("lobby",lobbySchema);
+export default mongoose.model("lobby", lobbySchema);
