@@ -12,7 +12,7 @@ const router = Router();
  * assign questions
  */
 // route:- /statequiz/[lobbyId]/[teamId]?questions=5(default)
-router.route("/startquiz/:lobbyId/:teamId").post(
+router.route("/start/:lobbyId/:teamId").post(
   verifyLobbyExists, 
   verifyTeamExists,
   verifyLobbyState([gameStates.idle, gameStates.attack]), // lobby state is controlled by server
@@ -26,7 +26,7 @@ router.route("/startquiz/:lobbyId/:teamId").post(
  * changes the question state to attempted.
  * assign points, if correct 
  */
-router.route("/verify/:lobbyId/:teamId/:quesId").post(
+router.route("/question/verify/:lobbyId/:teamId/:quesId").post(
   verifyLobbyExists, 
   verifyTeamExists, 
   verifyLobbyState([gameStates.quiz]),
@@ -40,7 +40,7 @@ router.route("/verify/:lobbyId/:teamId/:quesId").post(
  * Change the user state to idle
  * if (last team in lobby is sending the request) change the lobby state to deploy
  */
-router.route("/submitquiz/:lobbyId/:teamId").post(
+router.route("/submit/:lobbyId/:teamId").post(
   verifyLobbyExists, 
   verifyTeamExists, 
   verifyLobbyState([gameStates.quiz]),

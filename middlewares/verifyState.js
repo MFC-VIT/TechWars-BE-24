@@ -8,13 +8,12 @@ import teamModel from "../models/teamModel.js";
 
 export const verifyTeamState = (checkStates)=>{
   return async (req, res, next)=>{
-    if (!gameStates.values.includes(state)) return next(new Error("invalid state check."));
-    const teamId = req.teamdId;
+    const teamId = req.teamId;
     try {
       const team = await teamModel.findById(teamId);
       if (!team) return next(new Error("Team does not exist"));
       for (const state of checkStates){
-        if (team.state == state) next();
+        if (team.state == state) return next();
       }
       return next(new Error(`team is currently in ${team.state} state`));
     } catch(error){
@@ -26,13 +25,12 @@ export const verifyTeamState = (checkStates)=>{
 
 export const verifyLobbyState = (checkStates)=>{
   return async (req, res, next)=>{
-    if (!gameStates.values.includes(state)) return next(new Error("invalid state check."));
     const lobbyId = req.lobbyId;
     try {
       const lobby = await lobbyModel.findById(lobbyId);
       if (!lobby) return next(new Error("Lobby does not exist"));
       for (const state of checkStates){
-        if (lobby.state == state) next();
+        if (lobby.state == state) return next();
       }
       return next(new Error(`Lobby is currently in ${lobby.state} state`));
     } catch(error){

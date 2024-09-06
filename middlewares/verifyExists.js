@@ -9,7 +9,7 @@ export const verifyTeamExists = async (req, res, next)=>{
       return next(new Error("Team does not exist."));
     } 
     req.teamId = teamId;
-    next();
+    return next();
   } catch(error){
     return next(error);
   }
@@ -23,7 +23,7 @@ export const verifyLobbyExists = async (req, res, next)=>{
       return next(new Error("Lobby does not exist."));
     }
     req.lobbyId = lobbyId;
-    next();
+    return next();
   } catch(error){
     return next(error);
   }

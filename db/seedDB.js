@@ -52,8 +52,8 @@ const tempSeedTeams = async ()=>{
       
     ];
     await teamModel.insertMany(tempTeams);
-    const allUsers = await teamModel.find({ lobby_id: lobby._id });
-    lobby.allUsers = allUsers.map((user)=>user._id);
+    const allTeams = await teamModel.find({ lobby_id: lobby._id });
+    lobby.allTeams = allTeams.map((user)=>user._id);
     await lobby.save();
 
   } catch(error){
@@ -84,7 +84,7 @@ export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
 }
 
 // await tempSeedTeams();
-await seedQuestions("66da602e1599b492c4b64dd8", 5, 5);
+// await seedQuestions("66daf48e04bf61f827b1de0d", 5, 5);
 
 // for demo, assuming 2 teams, then 5 questions each. (total of 10 ques in db)
 // const seedQuestions = async ()=>{
