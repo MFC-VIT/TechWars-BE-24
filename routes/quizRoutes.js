@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { startQuiz, verifyAnswer } from "../controllers/quizController.js";
+import { startQuiz, verifyAnswer, submitQuiz } from "../controllers/quizController.js";
 import { verifyLobbyExists, verifyTeamExists } from './../middlewares/verifyExists.js';
 import { verifyLobbyState } from "../middlewares/verifyState.js";
 import { verifyTeamState } from './../middlewares/verifyState.js';
@@ -45,7 +45,7 @@ router.route("/submitquiz/:lobbyId/:teamId").post(
   verifyTeamExists, 
   verifyLobbyState([gameStates.quiz]),
   verifyTeamState([gameStates.quiz]),
-  // submitQuiz
+  submitQuiz
 )
 
 export default router;
