@@ -13,7 +13,7 @@ import Lobby from './models/lobbyModel.js';
 import Create from './models/createLobby.js';
 import Team from './models/teamModel.js';
 const PORT = process.env.PORT || 8080;
-const dbConnectionString = process.env.MONGO_URI || "mongodb://localhost:27017/techwars";
+const dbConnectionString = process.env.MONGO_URI || "mongodb://localhost:27017/techwarstest";
 import { fileURLToPath } from 'url';
 const { readFile } = fs.promises;
 const __filename = fileURLToPath(import.meta.url);
