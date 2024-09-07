@@ -7,13 +7,13 @@ import { gameStates } from "../constants.js";
 const router = Router();
 
 /**
+ * ROUTE:- /start?questions=5(default)
  * HEADERS:- teamId, lobbyId
  * check if (lobby state and team state are not quiz)
  * then changes the state for that lobby and teams inside
  * assign questions
  */
-// route:- /start?questions=5(default)
-router.route("/start/:lobbyId/:teamId").post(
+router.route("/start").post(
   verifyLobbyExists, 
   verifyTeamExists,
   verifyLobbyState([gameStates.idle, gameStates.attack, gameStates.quiz]), // lobby state is controlled by server
