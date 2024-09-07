@@ -21,6 +21,7 @@ router.delete('/logout', async (req, res) => {
             {lobbyId},
             {$inc:{loginCount :-1}}
         )
+        
         return res.status(200).json({ message: 'Team logged out successfully' });
     } catch (error) {
         console.error('Error during logout:', error); 
