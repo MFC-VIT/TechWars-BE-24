@@ -15,7 +15,7 @@ const router = Router();
 router.route("/start/:lobbyId/:teamId").post(
   verifyLobbyExists, 
   verifyTeamExists,
-  verifyLobbyState([gameStates.idle, gameStates.attack]), // lobby state is controlled by server
+  verifyLobbyState([gameStates.idle, gameStates.attack, gameStates.quiz]), // lobby state is controlled by server
   verifyTeamState([gameStates.idle, gameStates.quiz]), // if user resends the request in quiz state 
   startQuiz
 )
