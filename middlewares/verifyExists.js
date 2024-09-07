@@ -2,7 +2,7 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const verifyTeamExists = async (req, res, next)=>{
-  const teamId = req.params.teamId;
+  const teamId = req.headers.teamId;
   try {
     const team = await teamModel.findById(teamId);
     if (!team){
@@ -16,7 +16,7 @@ export const verifyTeamExists = async (req, res, next)=>{
 }
 
 export const verifyLobbyExists = async (req, res, next)=>{
-  const lobbyId = req.params.lobbyId;
+  const lobbyId = req.headers.lobbyId;
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     if (!lobby){

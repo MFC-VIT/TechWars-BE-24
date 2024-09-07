@@ -14,8 +14,8 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const startQuiz = async (req, res, next)=>{
-  const teamId = req.params.teamId;
-  const lobbyId = req.params.lobbyId;
+  const teamId = req.headers.teamId;
+  const lobbyId = req.headers.lobbyId;
   const quesCount = req.query.questions || 5;
   try {
     const team = await teamModel.findOne({
@@ -82,9 +82,9 @@ export const startQuiz = async (req, res, next)=>{
 
 
 export const verifyAnswer = async (req, res, next)=>{
-  const lobbyId = req.params.lobbyId;
-  const teamId = req.params.teamsId;
-  const quesId = req.params.quesId;
+  const lobbyId = req.headers.lobbyId;
+  const teamId = req.headers.teamsId;
+  const quesId = req.headers.quesId;
   const { answer } = req.body;
   try {
     const team = await teamModel.findOne({
@@ -124,8 +124,8 @@ export const verifyAnswer = async (req, res, next)=>{
  * change userState to idle
  */
 export const submitQuiz = async (req, res, next)=>{
-  const lobbyId = req.params.lobbyId;
-  const teamId = req.params.teamId;
+  const lobbyId = req.headers.lobbyId;
+  const teamId = req.headers.teamId;
   try {
     const team = await teamModel.findOne({
       _id: teamId,

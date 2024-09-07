@@ -9,10 +9,9 @@ import "dotenv/config"
 import { getNQuestions } from "../functions.js"
 import lobbyModel from "../models/lobbyModel.js"
 
-mongoose.connect(process.env.MONGO_URI)
-
 const tempSeedTeams = async ()=>{
   try {
+    await mongoose.connect(process.env.MONGO_URI)
     const teams = await teamModel.find();
     if (teams.length != 0){
       return;
@@ -59,12 +58,13 @@ const tempSeedTeams = async ()=>{
   } catch(error){
     console.error("Error seeding questions:", error);
   } finally {
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
 }
 
 export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
   try {
+    await mongoose.connect(process.env.MONGO_URI)
     const teamsInLobby = await teamModel.find({
       lobby_id: lobbyId
     })
@@ -79,7 +79,7 @@ export const seedQuestions = async (lobbyId, rounds, quesPerRound)=>{
   } catch (error){
     console.error("Error seeding questions:", error);
   } finally {
-    mongoose.connection.close();
+    await mongoose.connection.close();
   }
 }
 
