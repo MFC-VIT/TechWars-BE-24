@@ -9,13 +9,35 @@
  */
 
 
-import { gameStates, questionStates } from "../constants.js";
+import { gameStates, questionStates, stateDurations } from "../../constants.js";
+import { CustomError } from "../utils/functions.js";
 import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
+export const initQuiz = async (req, res, next)=>{
+  const lobbyName = req.headers.lobbyName;
+  try {
+    const lobby = await lobbyModel.findOne({ name: lobbyName });
+    if (lobby.activeTeams.length != 6) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
+
+    lobby.state = gameStates.quiz;
+    lobby.quizStartedAt = new Date.now();
+    lobby.quizEndedAt = new Date(lobby.quizStartedAt.getTime() + stateDurations.quiz);
+    await lobby.save();
+    
+    return res.status(200).json({
+      currentState: lobby.state,
+      success: true,
+      message: "Quiz has been initialized successfully"
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
 export const startQuiz = async (req, res, next)=>{
-  const teamId = req.headers.teamId;
-  const lobbyId = req.headers.lobbyId;
+  const teamId = req.teamId;
+  const lobbyId = req.lobbyId;
   const quesCount = req.query.questions || 5;
   try {
     const team = await teamModel.findOne({
@@ -31,6 +53,7 @@ export const startQuiz = async (req, res, next)=>{
         "$in": [teamId]
       } 
     });
+
     if (team.state == gameStates.quiz){
       const attemptingQuestions = team.questions.filter((question)=>{
         question.state == questionStates.attempting
@@ -38,11 +61,13 @@ export const startQuiz = async (req, res, next)=>{
 
       return res.status(200).json({
         questions: attemptingQuestions,
+        count: attemptingQuestions.length,
         success: true
       })
+      
     } else {
         team.state = gameStates.quiz;
-        lobby.state = gameStates.quiz;
+        lobby.state = gameStates.quiz; // requires-admin-check (case: after-attack-phase) (temporary soln)
 
         const startIndex = Math.floor(Math.random()*quesCount);
         const questions = [];
@@ -60,10 +85,14 @@ export const startQuiz = async (req, res, next)=>{
             break;
           }
         }
+
         await team.save();
         await lobby.save();
+
         return res.status(200).json({
-          questions,
+          questions: questions.map(
+            ({ _id, question, options })=>({ _id, question, options })
+          ),
           count: questions.length,
           success: true
         })
@@ -82,19 +111,23 @@ export const startQuiz = async (req, res, next)=>{
 
 
 export const verifyAnswer = async (req, res, next)=>{
-  const lobbyId = req.headers.lobbyId;
-  const teamId = req.headers.teamsId;
+  const lobbyId = req.lobbyId;
+  const teamId = req.teamsId;
   const quesId = req.headers.quesId;
-  const { answer } = req.body;
+  const answer = req.body.answer;
   try {
     const team = await teamModel.findOne({
       id: teamId,
       lobby_id: lobbyId
     });
+
     const quesIndex = team.questions.findIndex((question)=>(question._id == quesId));
     const question = team.questions[quesIndex];
+
     if (question.state != questionStates.attempting) return next(new Error("Invalid question id || question is not in attempting state."));
+
     team.questions[quesIndex].state = questionStates.attempted;
+
     if (question.answer == answer){
       team.score += question.points;
       await team.save();
@@ -113,6 +146,7 @@ export const verifyAnswer = async (req, res, next)=>{
         currentScore: team.score, 
       })
     }
+
   } catch(error){
     return next(error);
   }
@@ -124,13 +158,14 @@ export const verifyAnswer = async (req, res, next)=>{
  * change userState to idle
  */
 export const submitQuiz = async (req, res, next)=>{
-  const lobbyId = req.headers.lobbyId;
-  const teamId = req.headers.teamId;
+  const lobbyId = req.lobbyId;
+  const teamId = req.teamId;
   try {
     const team = await teamModel.findOne({
       _id: teamId,
       lobby_id: lobbyId 
     })
+
     for (let i = 0; i < team.questions.length; i++){
       if (team.questions[i].state == questionStates.attempting){
         team.questions[i].state = questionStates.attempted;
@@ -145,10 +180,11 @@ export const submitQuiz = async (req, res, next)=>{
         "$in": [teamId]
       } 
     });
+
     let isQuizOver = true;    
     for (const teamId of lobby.allTeams){
       const team = await teamModel.findById(teamId);
-      if (team.state != "idle") isQuizOver = false;
+      if (team.state != gameStates.idle) isQuizOver = false;
     }
 
     if (isQuizOver) lobby.state = gameStates.deploy;

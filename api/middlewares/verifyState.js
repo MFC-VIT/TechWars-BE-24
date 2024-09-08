@@ -1,4 +1,3 @@
-import { gameStates } from "../constants.js";
 import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
@@ -19,7 +18,6 @@ export const verifyTeamState = (checkStates)=>{
     } catch(error){
       return next(error);
     }
-    
   }
 }
 

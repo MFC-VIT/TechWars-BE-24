@@ -8,3 +8,9 @@ export const getNQuestions = (quesCount, quesList)=>{
   }
   return questions;
 }
+
+export const CustomError = (statusCode, message)=>{
+  const error = new Error(message);
+  error.status = statusCode;
+  return error;
+}

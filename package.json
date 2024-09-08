@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx nodemon index.js",
-    "seed-db": "node ./db/seedDb.js"
+    "seed-db": "node ./api/db/seedDb.js"
   },
   "keywords": [],
   "author": "",

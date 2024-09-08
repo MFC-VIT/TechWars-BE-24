@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { gameStates } from "../constants.js";
+import { gameStates } from "../../constants.js";
 
 const lobbySchema = new mongoose.Schema({
   name: {
@@ -7,11 +7,20 @@ const lobbySchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  // loggedInAt: {
+  //   type: Date,
+  //   default: Date.now()
+  // },
   userCount: {
     type: Number,
   },
   // userPresent: [User],
   allTeams: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "team"
+  }],
+  // teams that have logged in
+  activeTeams: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "team"
   }],
@@ -25,9 +34,14 @@ const lobbySchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    enum: Object.values(gameStates),
+    enum: Object.values(gameStates), // ["idle", "attack", "deploy", "quiz"]
     default: gameStates.idle,
-    required: true
+  },
+  quizStartedAt: {
+    type: Date
+  },
+  quizEndedAt: {
+    type: Date
   },
   whosAttack: {},
   nextRoundTime: {},
@@ -36,4 +50,6 @@ const lobbySchema = new mongoose.Schema({
   isTrainingTime: {},
 });
 
-export default mongoose.model("lobby", lobbySchema);
+const lobbyModel = mongoose.model("lobby", lobbySchema);
+
+export default lobbyModel;
