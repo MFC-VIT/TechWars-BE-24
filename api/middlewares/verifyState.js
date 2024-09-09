@@ -7,7 +7,7 @@ import teamModel from "../models/teamModel.js";
 
 export const verifyTeamState = (checkStates)=>{
   return async (req, res, next)=>{
-    const teamId = req.teamId;
+    const teamId = req.teamid;
     try {
       const team = await teamModel.findById(teamId);
       if (!team) return next(new Error("Team does not exist"));
@@ -23,7 +23,7 @@ export const verifyTeamState = (checkStates)=>{
 
 export const verifyLobbyState = (checkStates)=>{
   return async (req, res, next)=>{
-    const lobbyId = req.lobbyId;
+    const lobbyId = req.lobbyid;
     try {
       const lobby = await lobbyModel.findById(lobbyId);
       if (!lobby) return next(new Error("Lobby does not exist"));

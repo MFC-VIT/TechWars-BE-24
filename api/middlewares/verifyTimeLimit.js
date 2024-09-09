@@ -2,7 +2,7 @@ import { CustomError } from "../utils/functions.js";
 import lobbyModel from "../models/lobbyModel.js"
 
 export const verifyQuizRunnig = async (req, res, next)=>{
-  const lobbyId = req.lobbyId;
+  const lobbyId = req.lobbyid;
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     const currentTime = new Date.now();

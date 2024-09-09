@@ -3,7 +3,7 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const verifyUniqueLobby = async (req, res, next)=>{
-  const lobbyName = req.body.lobbyName;
+  const lobbyName = req.body.lobbyname;
   if (!lobbyName) return next(CustomError(400, "Lobby name required"))
   try {
     const lobby = await lobbyModel.findOne({
@@ -17,7 +17,7 @@ export const verifyUniqueLobby = async (req, res, next)=>{
 }
 
 export const verifyUniqueTeam = async (req, res, next)=>{
-  const teamName = req.body.teamName;
+  const teamName = req.body.teamname;
   if (!teamName) return next(CustomError(400, "Team name required"));
   try {
     const team = await teamModel.findOne({

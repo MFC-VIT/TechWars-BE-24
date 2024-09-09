@@ -13,14 +13,15 @@ const jwtSecret = process.env.JWT_SECRET;
  */
 
 export const createTeam = async (req, res, next)=>{
-  const { teamName, password } = req.body;
-  const lobbyId = req.headers.lobbyId;
-  if (!teamName) return next(CustomError(400, "Team name is required"));
+  const { teamname, password } = req.body;
+  const lobbyId = req.lobbyId;
+  if (!teamname) return next(CustomError(400, "Team name is required"));
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     if (lobby.allTeams.length == 6) return next(CustomError(400, "Lobby is full."));
     const team = await teamModel.create({
-      team_name: teamName,
+      team_name: teamname,
+      lobby_id: lobbyId,
       password,
     });
 
@@ -40,13 +41,13 @@ export const createTeam = async (req, res, next)=>{
  * gameCanStart: (true if activeTeams in lobby = 6 else false)
  */
 export const loginTeam = async (req, res, next)=>{
-  const { teamName, lobbyName, password } = req.body;
+  const { teamname, lobbyname, password } = req.body;
   try {
-    const lobby = await lobbyModel.findOne({ name: lobbyName });
+    const lobby = await lobbyModel.findOne({ name: lobbyname });
     if (!lobby) return next(CustomError(400, "Invalid lobby name."));
 
     const team = await teamModel.findOne({
-      team_name: teamName,
+      team_name: teamname,
       lobby_id: lobby.id,
       password,
     })

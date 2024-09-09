@@ -1,7 +1,7 @@
 import lobbyModel from "../models/lobbyModel.js";
 
 export const createLobby = async (req, res, next) => {
-  const lobbyName = req.body.lobbyName;
+  const lobbyName = req.body.lobbyname;
   try {
     const lobby = await lobbyModel.create({
       name: lobbyName

@@ -15,7 +15,7 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const initQuiz = async (req, res, next)=>{
-  const lobbyName = req.headers.lobbyName;
+  const lobbyName = req.headers.lobbyname;
   try {
     const lobby = await lobbyModel.findOne({ name: lobbyName });
     if (lobby.activeTeams.length != 6) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
@@ -113,7 +113,7 @@ export const startQuiz = async (req, res, next)=>{
 export const verifyAnswer = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   const teamId = req.teamsId;
-  const quesId = req.headers.quesId;
+  const quesId = req.headers.quesid;
   const answer = req.body.answer;
   try {
     const team = await teamModel.findOne({
