@@ -1,5 +1,5 @@
 {
-  "name": "risk-backend",
+  "name": "techwars-backend",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
