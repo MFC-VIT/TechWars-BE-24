@@ -3,7 +3,7 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const verifyTeamExists = async (req, res, next)=>{
-  const teamId = req.teamid;
+  const teamId = req.teamId;
   if (!teamId) return next(CustomError(400, "Team Id required"));
   try {
     const team = await teamModel.findById(teamId);
@@ -18,7 +18,7 @@ export const verifyTeamExists = async (req, res, next)=>{
 }
 
 export const verifyLobbyExists = async (req, res, next)=>{
-  const lobbyId = req.lobbyid;
+  const lobbyId = req.lobbyId;
   if (!lobbyId) return next(CustomError(400, "Lobby Id required"));
   try {
     const lobby = await lobbyModel.findById(lobbyId);

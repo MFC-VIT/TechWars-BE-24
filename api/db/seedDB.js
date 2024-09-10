@@ -18,11 +18,12 @@ export const seedQuestions = async ()=>{
     const teams = await teamModel.find();
     for (const team of teams){
       console.log(`Team: ${team.team_name}`);
-      if (team.questions.length){
-        team.questions = [];
+      if (team.areQuestionsSeeded){
+        continue;
       }
       const questionsForThisTeam = getNQuestions(questionToSeed, questions);
       team.questions = questionsForThisTeam;
+      team.areQuestionsSeeded = true;
       await team.save();
     } 
     console.log("\nSuccessfully, seeded questions for each team each team");

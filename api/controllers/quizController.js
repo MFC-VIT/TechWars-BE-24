@@ -21,7 +21,7 @@ export const initQuiz = async (req, res, next)=>{
     if (lobby.activeTeams.length != 6) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
 
     lobby.state = gameStates.quiz;
-    lobby.quizStartedAt = new Date.now();
+    lobby.quizStartedAt = Date.now();
     lobby.quizEndedAt = new Date(lobby.quizStartedAt.getTime() + stateDurations.quiz);
     await lobby.save();
     
@@ -45,7 +45,7 @@ export const startQuiz = async (req, res, next)=>{
       lobby_id: lobbyId
     });
 
-    if (quesCount > team.questions.length) return next(new Error("Invalid amount of questions requested"));
+    if (quesCount > team.questions.length) return next(CustomError(400, "Invalid amount of questions requested"));
 
     const lobby = await lobbyModel.findOne({
       _id: lobbyId,
@@ -53,6 +53,8 @@ export const startQuiz = async (req, res, next)=>{
         "$in": [teamId]
       } 
     });
+
+    if (!lobby.activeTeams.includes(team._id)) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
 
     if (team.state == gameStates.quiz){
       const attemptingQuestions = team.questions.filter((question)=>{
@@ -114,6 +116,7 @@ export const verifyAnswer = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   const teamId = req.teamsId;
   const quesId = req.headers.quesid;
+  
   const answer = req.body.answer;
   try {
     const team = await teamModel.findOne({
@@ -121,12 +124,11 @@ export const verifyAnswer = async (req, res, next)=>{
       lobby_id: lobbyId
     });
 
-    const quesIndex = team.questions.findIndex((question)=>(question._id == quesId));
-    const question = team.questions[quesIndex];
-
-    if (question.state != questionStates.attempting) return next(new Error("Invalid question id || question is not in attempting state."));
-
-    team.questions[quesIndex].state = questionStates.attempted;
+    const questions = team.questions;
+    const index = team.questions.findIndex((question)=>(question._id == quesId));
+    if (questions[index].state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
+    question[index].state = questionStates.attempted;
+    team.questions = questions;
 
     if (question.answer == answer){
       team.score += question.points;
