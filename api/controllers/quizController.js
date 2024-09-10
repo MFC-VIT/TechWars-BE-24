@@ -55,6 +55,7 @@ export const startQuiz = async (req, res, next)=>{
     });
 
     if (!lobby.activeTeams.includes(team._id)) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
+    if (!team.areQuestionsSeeded) return next(CustomError(400, "Question have not been seeded yet."))
 
     if (team.state == gameStates.quiz){
       const attemptingQuestions = team.questions.filter((question)=>{
