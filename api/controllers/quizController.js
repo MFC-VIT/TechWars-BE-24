@@ -57,11 +57,12 @@ export const startQuiz = async (req, res, next)=>{
     if (!lobby.activeTeams.includes(team._id)) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
     if (!team.areQuestionsSeeded) return next(CustomError(400, "Question have not been seeded yet."))
 
+
     if (team.state == gameStates.quiz){
       const attemptingQuestions = team.questions.filter((question)=>{
         question.state == questionStates.attempting
-      }).map(({ _id, question, options })=>({ _id, question, options }));
-
+      }).map(({ _id, id, question, options })=>({ _id, s_no: id, question, options }));
+    
       return res.status(200).json({
         questions: attemptingQuestions,
         count: attemptingQuestions.length,
@@ -88,13 +89,13 @@ export const startQuiz = async (req, res, next)=>{
             break;
           }
         }
-
+        
         await team.save();
         await lobby.save();
 
         return res.status(200).json({
           questions: questions.map(
-            ({ _id, question, options })=>({ _id, question, options })
+            ({ _id, id, question, options })=>({ _id, s_no: id, question, options })
           ),
           count: questions.length,
           success: true
@@ -115,29 +116,28 @@ export const startQuiz = async (req, res, next)=>{
 
 export const verifyAnswer = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
-  const teamId = req.teamsId;
-  const quesId = req.headers.quesid;
+  const teamId = req.teamId;
+  const quesId = req.headers.s_no;
   
   const answer = req.body.answer;
   try {
     const team = await teamModel.findOne({
-      id: teamId,
+      _id: teamId,
       lobby_id: lobbyId
     });
-
     const questions = team.questions;
-    const index = team.questions.findIndex((question)=>(question._id == quesId));
+    const index = questions.findIndex((question)=>(question.id == quesId));
     if (questions[index].state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
-    question[index].state = questionStates.attempted;
+    questions[index].state = questionStates.attempted;
     team.questions = questions;
 
-    if (question.answer == answer){
-      team.score += question.points;
+    if (questions[index].answer == answer){
+      team.score += questions[index].points;
       await team.save();
       return res.status(200).json({
         success: true,
         correct: true,
-        pointsWon: question.points,
+        pointsWon: questions[index].points,
         currentScore: team.score,
       })
     } else {
@@ -177,6 +177,8 @@ export const submitQuiz = async (req, res, next)=>{
     
     team.state = gameStates.idle;
 
+    await team.save();
+
     const lobby = await lobbyModel.findOne({
       _id: lobbyId,
       allTeams: {
@@ -191,8 +193,7 @@ export const submitQuiz = async (req, res, next)=>{
     }
 
     if (isQuizOver) lobby.state = gameStates.deploy;
-
-    await team.save();
+    
     await lobby.save();
 
     return res.json({

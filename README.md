@@ -6,4 +6,3 @@
 ```npm run seed-db```
 
 ## **Routes:**
-

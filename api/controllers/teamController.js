@@ -54,7 +54,9 @@ export const loginTeam = async (req, res, next)=>{
 
     if (!team) return next(CustomError(400, "Team does not exist | Team is not a part of this lobby | Incorrect password"));
 
-    lobby.activeTeams.push(team._id);
+    if (!lobby.activeTeams.includes(team._id)){
+      lobby.activeTeams.push(team._id);
+    }
 
     const token = jwt.sign({
       teamId: team._id,

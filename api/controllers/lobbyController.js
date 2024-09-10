@@ -22,7 +22,7 @@ export const createLobby = async (req, res, next) => {
 export const getAvailableLobbies = async (req, res, next)=>{
   try {
     const lobbies = await lobbyModel.find({
-      allTeams: { "$size": { "$lt": 6 } }
+      $expr: { $lt: [{ $size: "$allTeams" }, 6] }
     });
     return res.status(200).json({
       availableLobbies: lobbies.map(({ id, name })=>({id, name})),
