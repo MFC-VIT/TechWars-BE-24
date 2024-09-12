@@ -18,7 +18,8 @@ export const initQuiz = async (req, res, next)=>{
   const lobbyName = req.headers.lobbyname;
   try {
     const lobby = await lobbyModel.findOne({ name: lobbyName });
-    if (lobby.activeTeams.length != 6) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
+    // If all teams of lobby have logged in then quiz can start
+    if (lobby.activeTeams.length != lobby.allTeams.length) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
 
     lobby.state = gameStates.quiz;
     lobby.quizStartedAt = Date.now();
@@ -38,7 +39,7 @@ export const initQuiz = async (req, res, next)=>{
 export const startQuiz = async (req, res, next)=>{
   const teamId = req.teamId;
   const lobbyId = req.lobbyId;
-  const quesCount = req.query.questions || 5;
+  const quesCount = parseInt(req.query.questions) || 5;
   try {
     const team = await teamModel.findOne({
       _id: teamId,
@@ -59,12 +60,11 @@ export const startQuiz = async (req, res, next)=>{
 
 
     if (team.state == gameStates.quiz){
-      const attemptingQuestions = team.questions.filter((question)=>{
-        question.state == questionStates.attempting
-      }).map(({ _id, id, question, options })=>({ _id, s_no: id, question, options }));
-    
+      const attemptingQuestions = team.questions.filter((question)=>(
+        question.state === questionStates.attempting
+      ));
       return res.status(200).json({
-        questions: attemptingQuestions,
+        questions: attemptingQuestions.map(({ id, question, options })=>({ s_no: id, question, options })),
         count: attemptingQuestions.length,
         success: true
       })
@@ -192,7 +192,7 @@ export const submitQuiz = async (req, res, next)=>{
       if (team.state != gameStates.idle) isQuizOver = false;
     }
 
-    if (isQuizOver) lobby.state = gameStates.deploy;
+    if (isQuizOver) lobby.state = gameStates.idle;
     
     await lobby.save();
 
