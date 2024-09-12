@@ -42,9 +42,9 @@ const  teamSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  rounds:{
-    type:Number
-  }
+  // rounds:{
+  //   type:Number
+  // }
 });
 
 const teamModel = mongoose.model("team",teamSchema);

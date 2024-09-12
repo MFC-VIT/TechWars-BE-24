@@ -11,9 +11,9 @@ const lobbySchema = new mongoose.Schema({
   //   type: Date,
   //   default: Date.now()
   // },
-  userCount: {
-    type: Number,
-  },
+  // userCount: {
+  //   type: Number,
+  // },
   // userPresent: [User],
   allTeams: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -24,17 +24,17 @@ const lobbySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "team"
   }],
-  territoryId: {
-    type: String,
-    default: null,
-  },
-  roundsOver: {
-    type: Boolean,
-    default: false,
-  },
+  // territoryId: {
+  //   type: String,
+  //   default: null,
+  // },
+  // roundsOver: {
+  //   type: Boolean,
+  //   default: false,
+  // },
   state: {
     type: String,
-    enum: Object.values(gameStates), // ["idle", "attack", "deploy", "quiz"]
+    enum: Object.values(gameStates), // ["idle", "quiz", "gameOver"]
     default: gameStates.idle,
   },
   quizStartedAt: {
@@ -43,11 +43,11 @@ const lobbySchema = new mongoose.Schema({
   quizEndedAt: {
     type: Date
   },
-  whosAttack: {},
-  nextRoundTime: {},
-  isQuizTime: {},
-  isAttackTime: {},
-  isTrainingTime: {},
+  // whosAttack: {},
+  // nextRoundTime: {},
+  // isQuizTime: {},
+  // isAttackTime: {},
+  // isTrainingTime: {},
 });
 
 const lobbyModel = mongoose.model("lobby", lobbySchema);

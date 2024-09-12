@@ -48,7 +48,7 @@ router.route("/question/verify").post(
  * check the (lobby and team gameStates are quiz or not.)
  * set all attempting ques to attempted
  * Change the user state to idle
- * if (last team in lobby is sending the request) change the lobby state to deploy
+ * if (last team in lobby is sending the request) change the lobby state to idle
  */
 router.route("/submit").post(
   validateToken,
