@@ -58,7 +58,7 @@ export const startQuiz = async (req, res, next)=>{
       "teams.teamId": team._id
     });
 
-    if (!lobby.teams.find(team=>team.teamId == team._id).active) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
+    if (!lobby.teams.find(teamObj=>teamObj.teamId == team._id).active) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
     if (!team.areQuestionsSeeded) return next(CustomError(400, "Question have not been seeded yet."))
 
 
@@ -134,10 +134,20 @@ export const verifyAnswer = async (req, res, next)=>{
     if (questions[index].state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
     questions[index].state = questionStates.attempted;
     team.questions = questions;
-
+    
     if (questions[index].answer == answer){
       team.score += questions[index].points;
       await team.save();
+      
+      const lobby = await lobbyModel.findById(team.lobby_id)
+      lobby.teams = lobby.teams.map(teamObj=>{
+        if (teamObj.teamId == team._id){
+          teamObj.score = team.score;
+        }
+        return teamObj;
+      })
+      await lobby.save();
+
       return res.status(200).json({
         success: true,
         correct: true,

@@ -79,11 +79,11 @@ export const loginTeam = async (req, res, next)=>{
       return next(CustomError(400, "Team has already been logged in. Multiple logins not allowed."))
     }
 
-    lobby.teams = lobby.teams.map(team=>{
-      if (team.teamId == team._id){
-        team.active = true;
+    lobby.teams = lobby.teams.map(teamObj=>{
+      if (teamObj.teamId == team._id){
+        teamObj.active = true;
       }
-      return team;
+      return teamObj;
     })
 
     lobby.activeCount += 1;
@@ -118,13 +118,13 @@ export const logoutTeam = async (req, res, next)=>{
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     const team = await teamModel.findById(teamId);
-    if (!(lobby.teams.find(team=>team.teamId == teamId))) return next(CustomError("Team is not present in this lobby"));
+    if (!(lobby.teams.find(teamObj=>teamObj.teamId == team._id))) return next(CustomError("Team is not present in this lobby"));
     team.state = gameStates.idle;
-    lobby.teams = lobby.teams.map(team=>{
-      if (team.teamId == teamId){
-        team.active = false;
+    lobby.teams = lobby.teams.map(teamObj=>{
+      if (teamObj.teamId == team._id){
+        teamObj.active = false;
       }
-      return team;
+      return teamObj;
     })
     lobby.activeCount -= 1;
     if (lobby.activeCount == 0 && lobby.quiz.endedAt.getTime() < Date.now()) lobby.state = gameStates.gameOver;
@@ -183,7 +183,7 @@ export const migrateTeam = async (req, req, next)=>{
 
     const lobby = await lobbyModel.findById(lobbyId);
 
-    if (lobby.teams.find(team=>team.teamId == team._id)){
+    if (lobby.teams.find(teamObj=>teamObj.teamId == team._id)){
       return next(CustomError(400, "User already present in the requested lobby"));
     }
 
