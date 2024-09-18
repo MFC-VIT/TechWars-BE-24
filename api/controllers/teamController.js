@@ -169,7 +169,7 @@ export const getCurrentScore = async (req, res, next)=>{
  * make it inactive for its previous lobby
  * reset user score???
  */
-export const migrateTeam = async (req, req, next)=>{
+export const migrateTeam = async (req, res, next)=>{
   const teamId = req.teamId;
   const lobbyId = req.lobbyId;
   try {

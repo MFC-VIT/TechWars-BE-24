@@ -2,7 +2,7 @@ import { Router } from "express";
 import { verifyUniqueLobby, verifyUniqueTeam } from "../middlewares/verifyUnique.js";
 import { createLobby, getAvailableLobbies, getLobbyData } from "../controllers/lobbyController.js";
 import { verifyAdmin } from "../middlewares/verifyAdmin.js";
-import { createTeam, migrateTeam } from "../controllers/teamController.js";
+import { createTeam, forceMigrateTeam, getTeamData, migrateTeam } from "../controllers/teamController.js";
 import { verifyLobbyExistsByName, verifyTeamExistsByName } from "../middlewares/verifyExists.js";
 import { initQuiz } from "../controllers/quizController.js";
 import { verifyLobbyState, verifyTeamState } from "../middlewares/verifyState.js";
@@ -26,7 +26,7 @@ router.route("/lobby/create").post(
  * BODY: { lobbyName },
  * HEADERS: { adminName }
  */
-route.route("/lobby").get(
+router.route("/lobby").get(
   verifyAdmin,
   verifyLobbyExistsByName,
   getLobbyData
@@ -59,7 +59,7 @@ router.route("/team/create").post(
  * BODY: { lobbyName },
  * HEADERS: { adminName }
  */
-route.route("/team").get(
+router.route("/team").get(
   verifyAdmin,
   verifyTeamExistsByName,
   getTeamData
@@ -77,7 +77,7 @@ route.route("/team").get(
  * HEADERS: { adminname }
 */
 router.route("/team/migrate").post(
-  verifyAdmin.
+  verifyAdmin,
   verifyLobbyExistsByName,
   verifyTeamExistsByName,
   verifyLobbyState([ gameStates.idle ]), // state of new lobby
