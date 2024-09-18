@@ -1,22 +1,35 @@
 import { Router } from "express";
 import { verifyUniqueLobby, verifyUniqueTeam } from "../middlewares/verifyUnique.js";
-import { createLobby, getAvailableLobbies } from "../controllers/lobbyController.js";
+import { createLobby, getAvailableLobbies, getLobbyData } from "../controllers/lobbyController.js";
 import { verifyAdmin } from "../middlewares/verifyAdmin.js";
-import { createTeam } from "../controllers/teamController.js";
-import { verifyLobbyExistsByName } from "../middlewares/verifyExists.js";
+import { createTeam, migrateTeam } from "../controllers/teamController.js";
+import { verifyLobbyExistsByName, verifyTeamExistsByName } from "../middlewares/verifyExists.js";
 import { initQuiz } from "../controllers/quizController.js";
+import { verifyLobbyState, verifyTeamState } from "../middlewares/verifyState.js";
+import { gameStates } from "../../constants.js";
 
 const router = new Router();
 
 /**
  * Admin creates a lobby with custom lobby name
- * BODY: { lobbyName }
+ * BODY: { lobbyName, limit{default: 6} }
  * HEADERS: { adminName }
  */
 router.route("/lobby/create").post(
   verifyAdmin,
   verifyUniqueLobby,
   createLobby
+)
+
+/**
+ * To get lobby date (teams score and leaderboard)
+ * BODY: { lobbyName },
+ * HEADERS: { adminName }
+ */
+route.route("/lobby").get(
+  verifyAdmin,
+  verifyLobbyExistsByName,
+  getLobbyData
 )
 
 /**
@@ -40,6 +53,54 @@ router.route("/team/create").post(
   verifyUniqueTeam,
   createTeam
 )
+
+/**
+ * To get lobby date (teams score and leaderboard)
+ * BODY: { lobbyName },
+ * HEADERS: { adminName }
+ */
+route.route("/team").get(
+  verifyAdmin,
+  verifyTeamExistsByName,
+  getTeamData
+)
+////////////////////////////////////////////////
+/**
+ * Place team to another lobby,
+ * check if team and lobby exists
+ * check its state is idle or  not
+ * make it inactive for its previous lobby
+ * check if already present in new lobby
+ * check if new lobby is already full
+ * ??? reset user score
+ * BODY: { lobbyname, teamname }
+ * HEADERS: { adminname }
+*/
+router.route("/team/migrate").post(
+  verifyAdmin.
+  verifyLobbyExistsByName,
+  verifyTeamExistsByName,
+  verifyLobbyState([ gameStates.idle ]), // state of new lobby
+  verifyTeamState([ gameStates.idle ]),
+  migrateTeam,
+)
+
+/**
+ * /team/migrate/force
+ * If team mistakenly loses the auth token, admin can forcefully logout the team 
+ * team will be removed from the lobby
+ * team state will be changed to idle
+ * team can be migrated to new lobby, score is reset
+ */
+
+router.route("/team/migrate/force").post(
+  verifyAdmin,
+  verifyTeamExistsByName,
+  verifyLobbyExistsByName,
+  verifyLobbyState([ gameStates.idle ]),
+  forceMigrateTeam
+)
+////////////////////////////////////////////////
 
 /**
  * Admin can start quiz for a lobby if lobby is full,

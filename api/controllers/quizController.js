@@ -10,7 +10,7 @@
 
 
 import { gameStates, questionStates, stateDurations } from "../../constants.js";
-import { CustomError } from "../utils/functions.js";
+import { CustomError, shuffleArray } from "../utils/functions.js";
 import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
@@ -18,16 +18,21 @@ export const initQuiz = async (req, res, next)=>{
   const lobbyName = req.headers.lobbyname;
   try {
     const lobby = await lobbyModel.findOne({ name: lobbyName });
+    if (lobby.teams != lobby.limit){
+      return next(CustomError(400, `Only ${lobby.teams.length} teams are present in lobby. ${lobby.limit} teams are required to init the quiz.`))
+    }
     // If all teams of lobby have logged in then quiz can start
-    if (lobby.activeTeams.length != lobby.allTeams.length) return next(CustomError(400, `Only ${lobby.activeTeams.length} has/have joined`));
+    if (lobby.activeCount != lobby.teams.length) return next(CustomError(400, `Only ${lobby.activeCount} has/have joined`));
 
     lobby.state = gameStates.quiz;
-    lobby.quizStartedAt = Date.now();
-    lobby.quizEndedAt = new Date(lobby.quizStartedAt.getTime() + stateDurations.quiz);
+    lobby.quiz.startedAt = Date.now();
+    lobby.quiz.endedAt = new Date(lobby.quiz.startedAt.getTime() + stateDurations.quiz);
     await lobby.save();
     
     return res.status(200).json({
       currentState: lobby.state,
+      quizStartedAt: lobby.quiz.startedAt,
+      quizEndsAt: lobby.quiz.endedAt,
       success: true,
       message: "Quiz has been initialized successfully"
     })
@@ -50,12 +55,10 @@ export const startQuiz = async (req, res, next)=>{
 
     const lobby = await lobbyModel.findOne({
       _id: lobbyId,
-      allTeams: {
-        "$in": [teamId]
-      } 
+      "teams.teamId": team._id
     });
 
-    if (!lobby.activeTeams.includes(team._id)) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
+    if (!lobby.teams.find(team=>team.teamId == team._id).active) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
     if (!team.areQuestionsSeeded) return next(CustomError(400, "Question have not been seeded yet."))
 
 
@@ -71,27 +74,27 @@ export const startQuiz = async (req, res, next)=>{
       
     } else {
         team.state = gameStates.quiz;
-        lobby.state = gameStates.quiz; // requires-admin-check (case: after-attack-phase) (temporary soln)
 
-        const startIndex = Math.floor(Math.random()*quesCount);
-        const questions = [];
+        const startIndex = Math.floor(Math.random() * team.questions.length);
+        let questions = [];
         const availableQues = team.questions;
         let quesChecked = 0;
-        for (let i = startIndex; i < startIndex+quesCount;){
-          const iterator = i >= availableQues.length ? i - availableQues.length : i;
-          quesChecked++;
+        let i = 0;
+
+        while (i < quesCount && quesChecked < availableQues.length){
+          const iterator = (i+startIndex) % availableQues.length;
           if (team.questions[iterator].state == questionStates.notAttempted){
             team.questions[iterator].state = questionStates.attempting;
             questions.push(availableQues[iterator]);
             i++;
           }
-          if (quesChecked == availableQues.length){
-            break;
-          }
+          quesChecked++;
         }
         
         await team.save();
         await lobby.save();
+        
+        questions = shuffleArray(questions);
 
         return res.status(200).json({
           questions: questions.map(
@@ -125,6 +128,7 @@ export const verifyAnswer = async (req, res, next)=>{
       _id: teamId,
       lobby_id: lobbyId
     });
+
     const questions = team.questions;
     const index = questions.findIndex((question)=>(question.id == quesId));
     if (questions[index].state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
@@ -181,18 +185,16 @@ export const submitQuiz = async (req, res, next)=>{
 
     const lobby = await lobbyModel.findOne({
       _id: lobbyId,
-      allTeams: {
-        "$in": [teamId]
-      } 
+      "teams.teamId": team._id 
     });
 
     let isQuizOver = true;    
-    for (const teamId of lobby.allTeams){
-      const team = await teamModel.findById(teamId);
+    for (const teamObj of lobby.teams){
+      const team = await teamModel.findById(teamObj.teamId);
       if (team.state != gameStates.idle) isQuizOver = false;
     }
 
-    if (isQuizOver) lobby.state = gameStates.idle;
+    if (isQuizOver) lobby.state = gameStates.gameOver
     
     await lobby.save();
 

@@ -18,14 +18,14 @@ export const createTeam = async (req, res, next)=>{
   if (!teamname) return next(CustomError(400, "Team name is required"));
   try {
     const lobby = await lobbyModel.findById(lobbyId);
-    if (lobby.allTeams.length == 6) return next(CustomError(400, "Lobby is full."));
+    if (lobby.teams.length == lobby.limit) return next(CustomError(400, "Lobby is full."));
     const team = await teamModel.create({
       team_name: teamname,
       lobby_id: lobbyId,
       password,
     });
 
-    lobby.allTeams.push(team.id);
+    lobby.teams.push({ teamId: team._id });
     await lobby.save();
     return res.status(200).json({
       success: true,
@@ -36,7 +36,28 @@ export const createTeam = async (req, res, next)=>{
   }
 }
 
+//////////////////////////////////////////////////
+// To get team's data
+export const getTeamData = async (req, res, next)=>{
+  const teamId = req.teamId;
+  try {
+    const team = await teamModel.findById(teamId);
+    return res.status(200).json({
+      id: team._id,
+      lobbyId: team.lobby_id,
+      name: team.name,
+      state: team.state,
+      score: team.score,
+      areQuestionsSeeded: team.areQuestionsSeeded,
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+/////////////////////////////////////////////////////
+
 /**
+ * Logs in to a lobby
  * Returns a jwt with userId and lobbyId
  * gameCanStart: (true if activeTeams in lobby = 6 else false)
  */
@@ -54,30 +75,30 @@ export const loginTeam = async (req, res, next)=>{
 
     if (!team) return next(CustomError(400, "Team does not exist | Team is not a part of this lobby | Incorrect password"));
 
-    if (!lobby.activeTeams.includes(team._id)){
-      lobby.activeTeams.push(team._id);
+    if (lobby.teams.find(team=>team.teamId == team._id).active){
+      return next(CustomError(400, "Team has already been logged in. Multiple logins not allowed."))
     }
+
+    lobby.teams = lobby.teams.map(team=>{
+      if (team.teamId == team._id){
+        team.active = true;
+      }
+      return team;
+    })
+
+    lobby.activeCount += 1;
 
     const token = jwt.sign({
       teamId: team._id,
       lobbyId: lobby._id
-    }, jwtSecret, { expiresIn: '6h' });
+    }, jwtSecret, { expiresIn: '12h' });
 
     await lobby.save();
 
-    if (lobby.activeTeams.length == 6){
-      return res.status(200).json({
-        success: true,
-        message: "Team has been logged in successfully",
-        gameCanStart: true,
-        token,
-        activeTeams: lobby.activeTeams.length
-
-      })
-    } else return res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Team has been logged in successfully",
-      gameCanStart: false,
+      gameCanStart: lobby.activeCount == lobby.limit,
       token,
       activeTeams: lobby.activeTeams.length
     })
@@ -87,6 +108,7 @@ export const loginTeam = async (req, res, next)=>{
 }
 
 /**
+ * Logout from a lobby
  * Logging out team at the end of game (changing gameState for team to gameOver acception no further request)
  * if (active teams in lobby is 0 then lobby state is also changed to gameOver)
  */
@@ -96,10 +118,16 @@ export const logoutTeam = async (req, res, next)=>{
   try {
     const lobby = await lobbyModel.findById(lobbyId);
     const team = await teamModel.findById(teamId);
-    if (!(lobby.allTeams.includes(team._id))) return next(CustomError("Team is not present in this lobby"));
-    team.state = gameStates.gameOver;
-    lobby.activeTeams.splice(lobby.activeTeams.indexOf(team._id), 1);
-    if (lobby.activeTeams.length == 0) lobby.state = gameStates.gameOver;
+    if (!(lobby.teams.find(team=>team.teamId == teamId))) return next(CustomError("Team is not present in this lobby"));
+    team.state = gameStates.idle;
+    lobby.teams = lobby.teams.map(team=>{
+      if (team.teamId == teamId){
+        team.active = false;
+      }
+      return team;
+    })
+    lobby.activeCount -= 1;
+    if (lobby.activeCount == 0 && lobby.quiz.endedAt.getTime() < Date.now()) lobby.state = gameStates.gameOver;
     await team.save();
     await lobby.save();
     return res.status(200).json({
@@ -131,3 +159,123 @@ export const getCurrentScore = async (req, res, next)=>{
     return next(error);
   }
 }
+
+//////////////////////////////////////////////////
+/**
+ * To migrate to a new lobby
+ * check if already present in new lobby
+ * check if new lobby is already full
+ * check if previous lobby state is gameOver or not
+ * make it inactive for its previous lobby
+ * reset user score???
+ */
+export const migrateTeam = async (req, req, next)=>{
+  const teamId = req.teamId;
+  const lobbyId = req.lobbyId;
+  try {
+    const team = await teamModel.findById(teamId);    
+    const previousLobby = await lobbyModel.findById(team.lobby_id);
+    
+    if (previousLobby.state != gameStates.gameOver){
+      // if lobby is attemting quiz but team has been logged out.
+      return next(CustomError(400, "Quiz round for the team's current lobby has not ended."))
+    }
+
+    const lobby = await lobbyModel.findById(lobbyId);
+
+    if (lobby.teams.find(team=>team.teamId == team._id)){
+      return next(CustomError(400, "User already present in the requested lobby"));
+    }
+
+    if (lobby.teams.length == lobby.limit){
+      return next(CustomError(400, "Requested lobby is full."))
+    }
+
+    const prevLobbyTeams = previousLobby.teams;
+    prevLobbyTeams.map(team=>{
+      if (team.teamId == team._id){
+        team.active = false;
+      }
+      return team;
+    })
+    previousLobby.teams = prevLobbyTeams;
+    await previousLobby.save();
+    
+    lobby.teams.push({
+      teamId: team._id,
+    })
+    await lobby.save()
+
+    team.lobby_id = lobby._id;
+    team.score = 0 // ????
+    await team.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully migrated team to the requested lobby",
+      team: {
+        id: team._id,
+        name: team.name,
+        state: team.state,
+        prevScore: previousLobby.teams.find(team=>team.teamId == team._id).score,
+        prevLobby: previousLobby.name,
+        newLobby: lobby.name,
+        lobbyState: lobby.state
+      }
+    })
+
+  } catch(error){
+    return next(error);
+  }
+}
+
+
+export const forceMigrateTeam = async (req, res, next)=>{
+  const teamId = req.teamId;
+  const lobbyId = req.lobbyId;
+  try {
+    const team = await teamModel.findById(teamId);    
+    const previousLobby = await lobbyModel.findById(team.lobby_id);
+
+    previousLobby.teams = previousLobby.teams.filter(team=>team.teamId!=team._id)
+    await previousLobby.save();
+
+    team.state = gameStates.idle;
+
+    const lobby = await lobbyModel.findById(lobbyId);
+
+    if (lobby.teams.find(team=>team.teamId == team._id)){
+      return next(CustomError(400, "User already present in the requested lobby"));
+    }
+
+    if (lobby.teams.length == lobby.limit){
+      return next(CustomError(400, "Requested lobby is full."))
+    }
+
+    lobby.teams.push({
+      teamId: team._id,
+    })
+    await lobby.save()
+
+    team.lobby_id = lobby._id;
+    team.score = 0;
+    await team.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully migrated team to the requested lobby",
+      team: {
+        id: team._id,
+        name: team.name,
+        state: team.state,
+        prevLobby: previousLobby.name,
+        newLobby: lobby.name,
+        lobbyState: lobby.state
+      }
+    })
+    
+  } catch(error){
+    return next(error);
+  }
+}
+/////////////////////////////////////////////////

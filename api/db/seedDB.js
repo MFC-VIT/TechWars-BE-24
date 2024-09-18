@@ -6,7 +6,7 @@ import teamModel from "../models/teamModel.js"
 // import questionModel from "../models/questionsModel.js"
 import { questions } from "../../questions.js"
 import "dotenv/config"
-import { getNQuestions } from "../utils/functions.js"
+import { getNQuestions, shuffleArray } from "../utils/functions.js"
 import { questionToSeed } from "../../constants.js"
 import { connectDB } from "./connectDB.js"
 
@@ -14,14 +14,15 @@ const dbConnectionString = process.env.MONGO_URI
 
 export const seedQuestions = async ()=>{
   try {
-    connectDB(dbConnectionString);
+    await connectDB(dbConnectionString);
     const teams = await teamModel.find();
     for (const team of teams){
       console.log(`Team: ${team.team_name}`);
       if (team.areQuestionsSeeded){
         continue;
       }
-      const questionsForThisTeam = getNQuestions(questionToSeed, questions);
+      let questionsForThisTeam = getNQuestions(questionToSeed, questions);
+      questionsForThisTeam = shuffleArray(questionsForThisTeam);
       team.questions = questionsForThisTeam;
       team.areQuestionsSeeded = true;
       await team.save();

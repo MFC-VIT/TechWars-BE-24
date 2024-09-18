@@ -4,28 +4,34 @@ const  teamSchema = new mongoose.Schema({
   territory_id:[{
     type:mongoose.Schema.ObjectId,
   }],
+
   password:{
     type:String,
     required:true
   },
+
   lobby_id:{
     type:String,
     required:true
   },
+
   team_name:{
     type:String,
     required:true
   },
+
   state: {
     type: String,
     enum: Object.values(gameStates),
     default: gameStates.idle,
     required: true
   },
+
   areQuestionsSeeded: {
     type: Boolean,
     default: false
   },
+
   questions: [{
     id: String,
     question: String,
@@ -38,13 +44,12 @@ const  teamSchema = new mongoose.Schema({
     },
     points: Number,
   }],
+
   score:{
     type: Number,
     default: 0
   },
-  // rounds:{
-  //   type:Number
-  // }
+
 });
 
 const teamModel = mongoose.model("team",teamSchema);
