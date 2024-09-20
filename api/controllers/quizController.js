@@ -18,11 +18,11 @@ export const initQuiz = async (req, res, next)=>{
   const lobbyName = req.headers.lobbyname;
   try {
     const lobby = await lobbyModel.findOne({ name: lobbyName });
-    if (lobby.teams != lobby.limit){
+    if (lobby.teams.length != lobby.limit){
       return next(CustomError(400, `Only ${lobby.teams.length} teams are present in lobby. ${lobby.limit} teams are required to init the quiz.`))
     }
     // If all teams of lobby have logged in then quiz can start
-    if (lobby.activeCount != lobby.teams.length) return next(CustomError(400, `Only ${lobby.activeCount} has/have joined`));
+    if (lobby.activeCount != lobby.teams.length) return next(CustomError(400, `Only ${lobby.activeCount} teams has/have joined. Waiting for ${lobby.limit-lobby.activeCount} teams.`));
 
     lobby.state = gameStates.quiz;
     lobby.quiz.startedAt = Date.now();
@@ -58,7 +58,7 @@ export const startQuiz = async (req, res, next)=>{
       "teams.teamId": team._id
     });
 
-    if (!lobby.teams.find(teamObj=>teamObj.teamId == team._id).active) return next(CustomError(400, `Team: ${team.team_name} has not logged in yet.`))
+    if (!lobby.teams.find(teamObj=>teamObj.teamId.toString() == team._id.toString()).active) return next(CustomError(400, `Team: ${team.name} has not logged in yet.`))
     if (!team.areQuestionsSeeded) return next(CustomError(400, "Question have not been seeded yet."))
 
 
@@ -67,7 +67,7 @@ export const startQuiz = async (req, res, next)=>{
         question.state === questionStates.attempting
       ));
       return res.status(200).json({
-        questions: attemptingQuestions.map(({ id, question, options })=>({ s_no: id, question, options })),
+        questions: attemptingQuestions.map(({ id, question, options })=>({ id, question, options })),
         count: attemptingQuestions.length,
         success: true
       })
@@ -94,11 +94,11 @@ export const startQuiz = async (req, res, next)=>{
         await team.save();
         await lobby.save();
         
-        questions = shuffleArray(questions);
+        shuffleArray(questions);
 
         return res.status(200).json({
           questions: questions.map(
-            ({ _id, id, question, options })=>({ _id, s_no: id, question, options })
+            ({ id, question, options })=>({ id, question, options })
           ),
           count: questions.length,
           success: true
@@ -109,6 +109,7 @@ export const startQuiz = async (req, res, next)=>{
   }
 }
 
+//TODO: change the logic back to _id intead of s_no
 /**
  * *Check
  *  if (question state != attempting) error
@@ -120,7 +121,7 @@ export const startQuiz = async (req, res, next)=>{
 export const verifyAnswer = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   const teamId = req.teamId;
-  const quesId = req.headers.s_no;
+  const quesId = req.headers.id;
   
   const answer = req.body.answer;
   try {
@@ -129,19 +130,23 @@ export const verifyAnswer = async (req, res, next)=>{
       lobby_id: lobbyId
     });
 
-    const questions = team.questions;
-    const index = questions.findIndex((question)=>(question.id == quesId));
-    if (questions[index].state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
-    questions[index].state = questionStates.attempted;
+    const questions = [...team.questions];
+    let ques = {};
+    questions.forEach(question=>{
+      if (question.id == quesId){
+        if (question.state != questionStates.attempting) return next(CustomError(400, "Invalid question id || question is not in attempting state."));
+        question.state = questionStates.attempted;
+        ques = question;
+      }
+    })
     team.questions = questions;
-    
-    if (questions[index].answer == answer){
-      team.score += questions[index].points;
+    if (ques.answer == answer){
+      team.score += ques.points;
       await team.save();
       
       const lobby = await lobbyModel.findById(team.lobby_id)
       lobby.teams = lobby.teams.map(teamObj=>{
-        if (teamObj.teamId == team._id){
+        if (teamObj.teamId.toString() == team._id.toString()){
           teamObj.score = team.score;
         }
         return teamObj;
@@ -151,7 +156,7 @@ export const verifyAnswer = async (req, res, next)=>{
       return res.status(200).json({
         success: true,
         correct: true,
-        pointsWon: questions[index].points,
+        pointsWon: ques.points,
         currentScore: team.score,
       })
     } else {
@@ -193,24 +198,27 @@ export const submitQuiz = async (req, res, next)=>{
 
     await team.save();
 
-    const lobby = await lobbyModel.findOne({
-      _id: lobbyId,
-      "teams.teamId": team._id 
-    });
+    // const lobby = await lobbyModel.findOne({
+    //   _id: lobbyId,
+    //   "teams.teamId": team._id 
+    // });
 
-    let isQuizOver = true;    
-    for (const teamObj of lobby.teams){
-      const team = await teamModel.findById(teamObj.teamId);
-      if (team.state != gameStates.idle) isQuizOver = false;
-    }
+    // let isQuizOver = true;    
+    // for (const teamObj of lobby.teams){
+    //   const team = await teamModel.findById(teamObj.teamId);
+    //   if (team.state != gameStates.idle) isQuizOver = false;
+    // }
 
-    if (isQuizOver) lobby.state = gameStates.gameOver
+    // if (isQuizOver) lobby.state = gameStates.gameOver
     
-    await lobby.save();
+    // await lobby.save();
 
     return res.json({
-      teamState: team.state,
-      lobbyState: lobby.state,
+      team: {
+        state: team.state,
+        score: team.score
+      },
+      // lobbyState: lobby.state,
       success: true
     })
 

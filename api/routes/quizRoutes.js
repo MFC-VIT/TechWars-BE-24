@@ -26,7 +26,7 @@ router.route("/start").post(
 )
 
 /**
- * HEADERS:- { quesId, token }
+ * HEADERS:- { id, token }
  * BODY:- { answer } (by user)
  * check if (lobby state and team state are quiz)
  * then checks the ans matches that ques
@@ -48,7 +48,7 @@ router.route("/question/verify").post(
  * check the (lobby and team gameStates are quiz or not.)
  * set all attempting ques to attempted
  * Change the user state to idle
- * if (last team in lobby is sending the request) change the lobby state to idle
+ *? if (last team in lobby is sending the request) change the lobby state to idle
  */
 router.route("/submit").post(
   validateToken,

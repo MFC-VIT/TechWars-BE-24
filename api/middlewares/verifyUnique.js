@@ -21,7 +21,7 @@ export const verifyUniqueTeam = async (req, res, next)=>{
   if (!teamName) return next(CustomError(400, "Team name required"));
   try {
     const team = await teamModel.findOne({
-      team_name: teamName
+      name: teamName
     })
     if (team) return next(CustomError(400, "Team already exists"));
     return next();

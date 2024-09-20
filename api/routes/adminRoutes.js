@@ -10,7 +10,7 @@ import { gameStates } from "../../constants.js";
 
 const router = new Router();
 
-/**
+/** 
  * Admin creates a lobby with custom lobby name
  * BODY: { lobbyName, limit{default: 6} }
  * HEADERS: { adminName }
@@ -23,8 +23,7 @@ router.route("/lobby/create").post(
 
 /**
  * To get lobby date (teams score and leaderboard)
- * BODY: { lobbyName },
- * HEADERS: { adminName }
+ * HEADERS: { adminName, lobbyName }
  */
 router.route("/lobby").get(
   verifyAdmin,
@@ -55,9 +54,8 @@ router.route("/team/create").post(
 )
 
 /**
- * To get lobby date (teams score and leaderboard)
- * BODY: { lobbyName },
- * HEADERS: { adminName }
+ * To get team data 
+ * HEADERS: { adminName, teamname }
  */
 router.route("/team").get(
   verifyAdmin,
@@ -73,8 +71,7 @@ router.route("/team").get(
  * check if already present in new lobby
  * check if new lobby is already full
  * ??? reset user score
- * BODY: { lobbyname, teamname }
- * HEADERS: { adminname }
+ * HEADERS: { adminname, lobbyname, teamname }
 */
 router.route("/team/migrate").post(
   verifyAdmin,
@@ -109,6 +106,7 @@ router.route("/team/migrate/force").post(
 router.route("/quiz/start").post(
   verifyAdmin,
   verifyLobbyExistsByName,
+  verifyLobbyState([ gameStates.idle ]),
   initQuiz
 )
 

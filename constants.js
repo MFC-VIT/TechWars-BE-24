@@ -5,7 +5,7 @@ export const gameStates = Object.freeze({
 });
 
 export const stateDurations = Object.freeze({
-  quiz: 15*60*1000
+  quiz: 30*60*1000
 })
 
 export const questionStates = Object.freeze({

@@ -51,7 +51,7 @@ export const getLobbyData = async (req, res, next)=>{
 export const getAvailableLobbies = async (req, res, next)=>{
   try {
     const lobbies = await lobbyModel.find({
-      $expr: { $lt: [{ $size: "$teams" }, 6] },
+      $expr: { $lt: [{ $size: "$teams" }, "$limit"] },
       state: gameStates.idle
     });
     return res.status(200).json({

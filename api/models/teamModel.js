@@ -15,7 +15,7 @@ const  teamSchema = new mongoose.Schema({
     required:true
   },
 
-  team_name:{
+  name:{
     type:String,
     required:true
   },

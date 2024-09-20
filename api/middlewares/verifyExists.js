@@ -50,11 +50,11 @@ export const verifyLobbyExistsByName = async (req, res, next)=>{
 //////////////////////////////////////////////////////
 export const verifyTeamExistsByName = async (req, res, next)=>{
   const teamName = req.headers.teamname;
-  if (!teamName) return next(CustomError(400, "Lobby name required"));
+  if (!teamName) return next(CustomError(400, "Team name required"));
   try {
     const team = await teamModel.findOne({ name: teamName });
     if (!team){
-      return next(CustomError(400, "Lobby does not exist."));
+      return next(CustomError(400, "Team does not exist."));
     }
     req.teamId = team._id;
     return next();

@@ -17,12 +17,12 @@ export const seedQuestions = async ()=>{
     await connectDB(dbConnectionString);
     const teams = await teamModel.find();
     for (const team of teams){
-      console.log(`Team: ${team.team_name}`);
       if (team.areQuestionsSeeded){
         continue;
       }
+      console.log(`Team: ${team.name}`);
       let questionsForThisTeam = getNQuestions(questionToSeed, questions);
-      questionsForThisTeam = shuffleArray(questionsForThisTeam);
+      shuffleArray(questionsForThisTeam);
       team.questions = questionsForThisTeam;
       team.areQuestionsSeeded = true;
       await team.save();
