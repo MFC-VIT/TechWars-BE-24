@@ -54,6 +54,25 @@ export const getTeamData = async (req, res, next)=>{
     return next(error);
   }
 }
+
+export const getAllTeams = async (req, res, next)=>{
+  const lobbyId = req.lobbyId;
+  try {
+    const lobby = await lobbyModel.findById(lobbyId);
+    const teamsInLobby = [];
+    for (const teamObj of lobby.teams){
+      const team = await teamModel.findById(teamObj.teamId);
+      teamsInLobby.push(team);
+    } 
+    return res.status(200).json({
+      success: truw,
+      teams: teamsInLobby
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
 /////////////////////////////////////////////////////
 /**
  * Logs in to a lobby
