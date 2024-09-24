@@ -14,9 +14,9 @@ import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
 
 export const initQuiz = async (req, res, next)=>{
-  const lobbyName = req.headers.lobbyname;
+  const lobbyId = req.lobbyId;
   try {
-    const lobby = await lobbyModel.findOne({ name: lobbyName });
+    const lobby = await lobbyModel.findById(lobbyId);
     // if (lobby.teams.length != lobby.limit){
     //   return next(CustomError(400, `Only ${lobby.teams.length} teams are present in lobby. ${lobby.limit} teams are required to init the quiz.`))
     // }
@@ -34,6 +34,30 @@ export const initQuiz = async (req, res, next)=>{
       quizEndsAt: lobby.quiz.endedAt,
       success: true,
       message: "Quiz has been initialized successfully"
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
+export const endQuiz = async (req, res, next)=>{
+  const lobbyId = req.lobbyId;
+  try {
+    const lobby = await lobbyModel.findById(lobbyId);
+    for (const teamObj of lobby.teams){
+      const team = await teamModel.findById(teamObj.teamId);
+      if (team.state == gameStates.quiz) return next(CustomError(400, `Team: ${team.name} is still attempting the quiz.`));
+    }
+    lobby.state = gameStates.gameOver;
+    lobby.quiz.endedAt = Date.now();
+    await lobby.save();
+
+    return res.status(200).json({
+      currentState: lobby.state,
+      quizStartedAt: lobby.quiz.startedAt,
+      quizEndedAt: lobby.quiz.endedAt,
+      success: true,
+      message: "Quiz has been ended successfully"
     })
   } catch(error){
     return next(error);

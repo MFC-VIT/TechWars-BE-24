@@ -67,7 +67,7 @@ export const transferTerritory = async (req, res, next)=>{
       const prevTeamId = territory.capturedBy;
       const prevTeam = await teamModel.findById(prevTeamId);
       const theirTerritories = prevTeam.territories;
-      prevTeam.territories = theirTerritories.filter(territoryObj=>territoryObj._id!=territory._id);
+      prevTeam.territories = theirTerritories.filter(territoryObj=>territoryObj._id.toString()!=territory._id.toString());
       await prevTeam.save();
     }
     territory.isCaptured = true;
