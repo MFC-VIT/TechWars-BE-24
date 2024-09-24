@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import { gameStates, questionStates } from "../../constants.js";
 const  teamSchema = new mongoose.Schema({
-  territory_id:[{
-    type:mongoose.Schema.ObjectId,
+  territories: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "territory"
   }],
 
   password:{
@@ -17,6 +18,7 @@ const  teamSchema = new mongoose.Schema({
 
   name:{
     type:String,
+    unique: true,
     required:true
   },
 

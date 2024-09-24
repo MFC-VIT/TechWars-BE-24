@@ -48,6 +48,7 @@ export const getTeamData = async (req, res, next)=>{
       state: team.state,
       score: team.score,
       areQuestionsSeeded: team.areQuestionsSeeded,
+      territories: team.territories,
     })
   } catch(error){
     return next(error);

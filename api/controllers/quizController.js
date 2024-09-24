@@ -1,5 +1,4 @@
 /**
- * * Checks
  * if (quiz){
  *  userState(quiz (that mean ques assigned for that round or not))
  *    checks if amount of questions requested is greater than the size of questions stored in userdb
@@ -18,9 +17,9 @@ export const initQuiz = async (req, res, next)=>{
   const lobbyName = req.headers.lobbyname;
   try {
     const lobby = await lobbyModel.findOne({ name: lobbyName });
-    if (lobby.teams.length != lobby.limit){
-      return next(CustomError(400, `Only ${lobby.teams.length} teams are present in lobby. ${lobby.limit} teams are required to init the quiz.`))
-    }
+    // if (lobby.teams.length != lobby.limit){
+    //   return next(CustomError(400, `Only ${lobby.teams.length} teams are present in lobby. ${lobby.limit} teams are required to init the quiz.`))
+    // }
     // If all teams of lobby have logged in then quiz can start
     if (lobby.activeCount != lobby.teams.length) return next(CustomError(400, `Only ${lobby.activeCount} teams has/have joined. Waiting for ${lobby.limit-lobby.activeCount} teams.`));
 
@@ -111,7 +110,6 @@ export const startQuiz = async (req, res, next)=>{
 
 //TODO: change the logic back to _id intead of s_no
 /**
- * *Check
  *  if (question state != attempting) error
  *  else compare and return
  * }
@@ -121,9 +119,9 @@ export const startQuiz = async (req, res, next)=>{
 export const verifyAnswer = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   const teamId = req.teamId;
-  const quesId = req.headers.id;
-  
+  const quesId = req.body.id;
   const answer = req.body.answer;
+  
   try {
     const team = await teamModel.findOne({
       _id: teamId,

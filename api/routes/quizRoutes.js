@@ -26,8 +26,8 @@ router.route("/start").post(
 )
 
 /**
- * HEADERS:- { id, token }
- * BODY:- { answer } (by user)
+ * HEADERS:- { token }
+ * BODY:- { quesId, answer } (by user)
  * check if (lobby state and team state are quiz)
  * then checks the ans matches that ques
  * changes the question state to attempted.
