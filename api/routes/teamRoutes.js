@@ -13,6 +13,7 @@ router.route("/login").post(
   loginTeam
 )
 
+// to fetch all team of that lobby
 router.route("/all").get(
   validateToken,
   verifyLobbyExists,
@@ -37,7 +38,7 @@ router.route("/logout").post(
  */
 router.route("/score").get(
   validateToken,
-  verifyLobbyExists,
+  // verifyLobbyExists,
   verifyTeamExists,
   getCurrentScore
 )

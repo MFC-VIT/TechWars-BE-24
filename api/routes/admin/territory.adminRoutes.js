@@ -19,16 +19,16 @@ router.route("/create").post(
   createTerritory
 )
 
-router.route("/all").get(
-  verifyAdmin,
-  getAllTerritories
-)
+// router.route("/all").get(
+//   verifyAdmin,
+//   getAllTerritories
+// )
 
-// not captured
-router.route("/free").get(
-  verifyAdmin,
-  getAvailableTerritories,
-)
+// // not captured
+// router.route("/free").get(
+//   verifyAdmin,
+//   getAvailableTerritories,
+// )
 
 //add or transfer ownership
 // headers: { teamname }

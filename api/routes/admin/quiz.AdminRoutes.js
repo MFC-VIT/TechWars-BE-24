@@ -25,7 +25,5 @@ router.route("/end").post(
   endQuiz
 )
 
-// TODO: end quiz
-
 
 export default router;
