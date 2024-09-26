@@ -66,5 +66,4 @@ router.route("/migrate/force").post(
   forceMigrateTeam
 )
 
-
 export default router;

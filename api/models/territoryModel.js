@@ -32,6 +32,7 @@ const territorySchema = new mongoose.Schema({
   },
   capturedBy: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "team"
   }
 })
 

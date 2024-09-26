@@ -1,3 +1,8 @@
+import { gameStates, questionStates, stateDurations } from "../../constants.js";
+import { CustomError, shuffleArray } from "../utils/functions.js";
+import lobbyModel from "../models/lobbyModel.js";
+import teamModel from "../models/teamModel.js";
+
 /**
  * if (quiz){
  *  userState(quiz (that mean ques assigned for that round or not))
@@ -6,13 +11,6 @@
  *    else send ques in "notAttempted" state and make them "attempting"
  * }
  */
-
-
-import { gameStates, questionStates, stateDurations } from "../../constants.js";
-import { CustomError, shuffleArray } from "../utils/functions.js";
-import lobbyModel from "../models/lobbyModel.js";
-import teamModel from "../models/teamModel.js";
-
 export const initQuiz = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   try {
@@ -132,7 +130,7 @@ export const startQuiz = async (req, res, next)=>{
   }
 }
 
-//TODO: change the logic back to _id intead of s_no
+// TODO: change the logic back to _id intead of s_no
 /**
  *  if (question state != attempting) error
  *  else compare and return

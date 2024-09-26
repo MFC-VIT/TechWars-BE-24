@@ -1,9 +1,14 @@
 import { Router } from "express";
 import { verifyLobbyExists, verifyTeamExists } from "../middlewares/verifyExists.js";
-import { getAllTeams, getCurrentScore, loginTeam, logoutTeam } from "../controllers/teamController.js";
+import { getAllTeams, getCurrentScore, getTeamData, loginTeam, logoutTeam } from "../controllers/teamController.js";
 import { validateToken } from "../middlewares/validateToken.js";
 
 const router = Router();
+
+router.route("/").get(
+  validateToken,
+  getTeamData
+)
 
 /**
  * Teams login using provided lobby name and their team name
@@ -11,14 +16,6 @@ const router = Router();
  */
 router.route("/login").post(
   loginTeam
-)
-
-// to fetch all team of that lobby
-router.route("/all").get(
-  validateToken,
-  verifyLobbyExists,
-  verifyTeamExists,
-  getAllTeams
 )
 
 /**

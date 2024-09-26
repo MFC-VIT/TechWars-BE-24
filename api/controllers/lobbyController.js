@@ -46,6 +46,24 @@ export const getLobbyData = async (req, res, next)=>{
     return next(error);
   }
 }
+
+export const getLobbyDisplayData = async (req, res, next)=>{
+  const lobbyId = req.lobbyId;
+  try {
+    const lobby = await lobbyModel.findById(lobbyId);
+    return res.status(200).json({
+      success: true,
+      lobby: {
+        name: lobby.name,
+        state: lobby.state,
+        teamsCount: lobby.teams.length,
+        quiz: lobby.quiz
+      }
+    })
+  } catch(error){
+    return next(error);
+  }
+}
 //////////////////////////////////////////////////////////
 
 export const getAvailableLobbies = async (req, res, next)=>{
@@ -57,6 +75,22 @@ export const getAvailableLobbies = async (req, res, next)=>{
     return res.status(200).json({
       availableLobbies: lobbies.map(({ id, name, state })=>({id, name, state})),
       success: true
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
+export const deleteLobby = async (req, res, next)=>{
+  const lobbyId = req.lobbyId;
+  try {
+    const lobby = await lobbyModel.findOneAndDelete({
+      _id: lobbyId
+    })
+    return res.status(200).json({
+      success: true,
+      message: "lobby has been successfully deleted",
+      lobby,
     })
   } catch(error){
     return next(error);

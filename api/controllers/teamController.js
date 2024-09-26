@@ -55,6 +55,7 @@ export const getTeamData = async (req, res, next)=>{
   }
 }
 
+// used in 2 places (admin, team)
 export const getAllTeams = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
   try {
@@ -62,10 +63,18 @@ export const getAllTeams = async (req, res, next)=>{
     const teamsInLobby = [];
     for (const teamObj of lobby.teams){
       const team = await teamModel.findById(teamObj.teamId);
-      teamsInLobby.push(team);
+      const { 
+        name, 
+        territories, 
+        state, 
+        areQuestionsSeeded, 
+        score 
+      } = team;
+      teamsInLobby.push({ name, score, state, territories, areQuestionsSeeded });
+      teamsInLobby.sort((team1, team2)=>team2.score - team1.score);
     } 
     return res.status(200).json({
-      success: truw,
+      success: true,
       teams: teamsInLobby
     })
   } catch(error){

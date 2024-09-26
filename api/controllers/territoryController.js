@@ -1,6 +1,5 @@
 import "dotenv/config"
 import territoryModel from "../models/territoryModel.js"
-import { CustomError } from "../utils/functions.js"
 import teamModel from "../models/teamModel.js";
 
 export const createTerritory = async (req, res, next)=>{
@@ -58,7 +57,7 @@ export const transferTerritory = async (req, res, next)=>{
     const territory = await territoryModel.findOne({
       $or : [
         { name: query },
-        { alias: query }
+        { alias: { $regex: query, $options: "i" } }
       ]
     });
     
@@ -76,10 +75,19 @@ export const transferTerritory = async (req, res, next)=>{
     await team.save()
     await territory.save()
 
+    const { 
+      name, 
+      territories, 
+      lobbyId, 
+      state, 
+      areQuestionsSeeded, 
+      score 
+    } = team;
+
     return res.status(200).json({
       success: true,
       territory,
-      team,
+      team: { name, territories, lobbyId, state, areQuestionsSeeded, score },
     })
   } catch(error){
     return next(error);
