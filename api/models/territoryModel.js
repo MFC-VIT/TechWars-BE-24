@@ -23,9 +23,10 @@ const territorySchema = new mongoose.Schema({
     type: Number,
     default: 0,  //Minimum Score require to acquire the territory, then updated to current max
   },
-  subterritories: [{
-    type: String,
-  }],
+  subterritories: {
+    type: [String],
+    default: [],  
+  },
   isCaptured: {
     type: Boolean,
     default: false
