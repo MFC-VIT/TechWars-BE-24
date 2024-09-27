@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { verifyLobbyExists, verifyTeamExists } from "../middlewares/verifyExists.js";
-import { getAllTeams, getCurrentScore, getTeamData, loginTeam, logoutTeam } from "../controllers/teamController.js";
+import { getAllTeams, getAllTeamsScore, getCurrentScore, getTeamData, loginTeam, logoutTeam } from "../controllers/teamController.js";
 import { validateToken } from "../middlewares/validateToken.js";
 
 const router = Router();
@@ -16,6 +16,10 @@ router.route("/").get(
  */
 router.route("/login").post(
   loginTeam
+)
+
+router.route("/score/all").get(
+  getAllTeamsScore
 )
 
 /**

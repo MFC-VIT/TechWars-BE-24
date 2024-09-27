@@ -73,6 +73,24 @@ export const updateTeamScore = async (req, res, next)=>{
   }
 }
 
+export const getAllTeamsScore = async (req, res, next)=>{
+  try {
+    const teams = await teamModel.find();
+    const scoreboard = [];
+    for (const team of teams){
+      const data = { name: team.name, score: team.score }
+      scoreboard.push(data);
+    }
+    scoreboard.sort((f, s)=>s.score-f.score);
+    return res.status(200).json({
+      success: true,
+      scoreboard,
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
 // used in 2 places (admin, team)
 export const getAllTeams = async (req, res, next)=>{
   const lobbyId = req.lobbyId;

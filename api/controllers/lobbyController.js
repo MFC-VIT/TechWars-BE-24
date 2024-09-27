@@ -1,7 +1,6 @@
 import { gameStates } from "../../constants.js";
 import lobbyModel from "../models/lobbyModel.js";
 import teamModel from "../models/teamModel.js";
-import { CustomError } from "../utils/functions.js";
 
 export const createLobby = async (req, res, next) => {
   const lobbyName = req.body.lobbyname;
@@ -56,8 +55,8 @@ export const getLobbyData = async (req, res, next)=>{
           active,
           name         
         };
-      })
-    );
+      })
+    );
     return res.status(200).json({
       success: true,
       lobby: {

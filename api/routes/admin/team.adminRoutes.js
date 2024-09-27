@@ -2,7 +2,7 @@ import { Router } from "express"
 import { verifyAdmin } from "../../middlewares/verifyAdmin.js";
 import { verifyLobbyExistsByName, verifyTeamExistsByName } from "../../middlewares/verifyExists.js";
 import { verifyUniqueTeam } from "../../middlewares/verifyUnique.js";
-import { createTeam, forceMigrateTeam, getAllTeams, getTeamData, migrateTeam, updateTeamScore } from "../../controllers/teamController.js";
+import { createTeam, forceMigrateTeam, getAllTeams, getAllTeamsScore, getTeamData, migrateTeam, updateTeamScore } from "../../controllers/teamController.js";
 import { gameStates } from "../../../constants.js";
 import { verifyLobbyState, verifyTeamState } from "../../middlewares/verifyState.js";
 
