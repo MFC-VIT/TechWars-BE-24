@@ -90,6 +90,7 @@ export const startQuiz = async (req, res, next)=>{
       return res.status(200).json({
         questions: attemptingQuestions.map(({ id, question, options })=>({ id, question, options })),
         count: attemptingQuestions.length,
+        quiz: lobby.quiz,
         success: true
       })
       
@@ -122,6 +123,7 @@ export const startQuiz = async (req, res, next)=>{
             ({ id, question, options })=>({ id, question, options })
           ),
           count: questions.length,
+          quiz: lobby.quiz,
           success: true
         })
     }

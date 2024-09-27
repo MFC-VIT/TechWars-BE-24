@@ -10,7 +10,11 @@ export const verifyQuizRunnig = async (req, res, next)=>{
     if (currentTime > lobby.quiz.endedAt.getTime()){
       lobby.state = gameStates.gameOver;
       await lobby.save();
-      return next(CustomError(400, "Quiz has ended"))
+      return res.status(200).json({
+        success: false,
+        hasQuizEnded: true,
+        message: "Quiz has ended."
+      })
     }
     return next();
   } catch(error){
