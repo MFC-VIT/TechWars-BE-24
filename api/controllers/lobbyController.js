@@ -1,5 +1,6 @@
 import { gameStates } from "../../constants.js";
 import lobbyModel from "../models/lobbyModel.js";
+import teamModel from "../models/teamModel.js";
 import { CustomError } from "../utils/functions.js";
 
 export const createLobby = async (req, res, next) => {
@@ -45,6 +46,13 @@ export const getLobbyData = async (req, res, next)=>{
     const lobby = await lobbyModel.findById(lobbyId);
     const { _id, name, state, limit, teams, quiz } = lobby;
     teams.sort((team1, team2)=>team2.score - team1.score);
+    teams = teams.map(async (teamObj)=>{
+      const team = await teamModel.findById(teamObj.teamId);
+      return {
+        ...teamObj,
+        name: team.name
+      }
+    })
     return res.status(200).json({
       success: true,
       lobby: {
