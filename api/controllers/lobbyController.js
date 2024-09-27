@@ -46,7 +46,7 @@ export const getLobbyData = async (req, res, next)=>{
     const lobby = await lobbyModel.findById(lobbyId);
     const { _id, name, state, limit, teams, quiz } = lobby;
     teams.sort((team1, team2)=>team2.score - team1.score);
-    teams = teams.map(async (teamObj)=>{
+    const teamData = teams.map(async (teamObj)=>{
       const team = await teamModel.findById(teamObj.teamId);
       return {
         ...teamObj,
@@ -60,7 +60,7 @@ export const getLobbyData = async (req, res, next)=>{
         name,
         state,
         limit,
-        teams,
+        teams: teamData,
         quiz
       }
     })
