@@ -2,6 +2,7 @@ import "dotenv/config"
 import territoryModel from "../models/territoryModel.js"
 import teamModel from "../models/teamModel.js";
 import { CustomError } from "../utils/functions.js";
+import lobbyModel from "../models/lobbyModel.js";
 
 export const createTerritory = async (req, res, next)=>{
   const {territoryname, subterritories, minScore, alias} = req.body;
@@ -59,6 +60,8 @@ export const getAvailableTerritories = async (req, res, next)=>{
 export const transferTerritory = async (req, res, next)=>{
   const teamId = req.teamId;
   const query = req.body.name;
+  const minScore = req.body.score;
+
   try {
     const territory = await territoryModel.findOne({
       $or : [
@@ -66,8 +69,9 @@ export const transferTerritory = async (req, res, next)=>{
         { alias: { $regex: query, $options: "i" } }
       ]
     });
-    
     const team = await teamModel.findById(teamId);
+    // const lobby = await lobbyModel.findById(team.lobby_id);
+
     if (territory.isCaptured){
       const prevTeamId = territory.capturedBy;
       const prevTeam = await teamModel.findById(prevTeamId);
@@ -79,7 +83,7 @@ export const transferTerritory = async (req, res, next)=>{
     territory.isCaptured = true;
     territory.capturedBy = teamId;
     territory.ownerName = team.name;
-    territory.requiredScore = team.score;
+    territory.requiredScore = minScore;
     team.territories.push(territory._id);
     await team.save()
     await territory.save()

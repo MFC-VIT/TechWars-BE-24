@@ -287,14 +287,14 @@ export const forceMigrateTeam = async (req, res, next)=>{
     
     lobby.teams.push({
       teamId: team._id,
-      // score: team.score
+      score: team.score
     })
 
     team.lobby_id = lobby._id;
     
     await lobby.save()
     await previousLobby.save();
-    team.score = 0;
+    // team.score = 0;
     await team.save();
 
     return res.status(200).json({
