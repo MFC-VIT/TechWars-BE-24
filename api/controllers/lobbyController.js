@@ -46,15 +46,18 @@ export const getLobbyData = async (req, res, next)=>{
     const lobby = await lobbyModel.findById(lobbyId);
     const { _id, name, state, limit, teams, quiz } = lobby;
     teams.sort((team1, team2)=>team2.score - team1.score);
-    let teamData = [];
-    teams.forEach(async (teamObj)=>{
-      const team = await teamModel.findById(teamObj.teamId);
-      teamData.push({
-        ...teamObj,
-        name: team.name,
-      })
-    })
-    console.log(teamData);
+    const teamData = await Promise.all(
+      teams.map(async (teamObj) => {
+        const team = await teamModel.findById(teamObj.teamId);
+        const name = team.name;
+        const { score, active } = teamObj; 
+        return {
+          score,
+          active,
+          name         
+        };
+      })
+    );
     return res.status(200).json({
       success: true,
       lobby: {

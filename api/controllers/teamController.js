@@ -54,6 +54,25 @@ export const getTeamData = async (req, res, next)=>{
   }
 }
 
+export const updateTeamScore = async (req, res, next)=>{
+  const teamId = req.teamId;
+  const updateScore = req.body.score;
+  try {
+    const team = await teamModel.findOneAndUpdate({
+      _id: teamId
+    }, {
+      score: updateScore
+    })
+    return res.status(200).json({
+      success: true,
+      message: "Score has been updates successfully",
+      team,
+    })
+  } catch(error){
+    return next(error);
+  }
+}
+
 // used in 2 places (admin, team)
 export const getAllTeams = async (req, res, next)=>{
   const lobbyId = req.lobbyId;
