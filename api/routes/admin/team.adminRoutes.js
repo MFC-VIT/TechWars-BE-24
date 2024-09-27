@@ -46,7 +46,7 @@ router.route("/migrate").post(
   verifyLobbyExistsByName,
   verifyTeamExistsByName,
   verifyLobbyState([ gameStates.idle ]), // state of new lobby
-  verifyTeamState([ gameStates.idle ]),
+  verifyTeamState([ gameStates.gameOver ]),
   migrateTeam,
 )
 

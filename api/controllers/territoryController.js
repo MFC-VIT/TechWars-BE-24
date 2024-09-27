@@ -1,6 +1,7 @@
 import "dotenv/config"
 import territoryModel from "../models/territoryModel.js"
 import teamModel from "../models/teamModel.js";
+import { CustomError } from "../utils/functions.js";
 
 export const createTerritory = async (req, res, next)=>{
   const {territoryname, subterritories, minScore, alias} = req.body;
@@ -14,10 +15,11 @@ export const createTerritory = async (req, res, next)=>{
       territory.alias = alias;
       await territory.save();
     }
+    const { name, requiredScore, subterritories, isCaptured, ownerName } = territory;
     return res.status(200).json({
       success: true,
       message: "territory created successfully",
-      territory,
+      territory: { name, requiredScore, subterritories, isCaptured, ownerName },
     });
   } catch(error){
     return next(error);
@@ -43,7 +45,11 @@ export const getAvailableTerritories = async (req, res, next)=>{
     });
     return res.status(200).json({
       success: true,
-      territories: availableTerritories,
+      territories: availableTerritories.map((
+        { name, requiredScore, subterritories, isCaptured, ownerName }
+      )=>(
+        { name, requiredScore, subterritories, isCaptured, ownerName }
+      )),
     })
   } catch(error){
     return next(error);
@@ -65,12 +71,15 @@ export const transferTerritory = async (req, res, next)=>{
     if (territory.isCaptured){
       const prevTeamId = territory.capturedBy;
       const prevTeam = await teamModel.findById(prevTeamId);
+      if (team.score <= prevTeam.score) return next(CustomError(400, "Insufficiant Score"));
       const theirTerritories = prevTeam.territories;
       prevTeam.territories = theirTerritories.filter(territoryObj=>territoryObj._id.toString()!=territory._id.toString());
       await prevTeam.save();
     }
     territory.isCaptured = true;
     territory.capturedBy = teamId;
+    territory.ownerName = team.name;
+    territory.requiredScore = team.score;
     team.territories.push(territory._id);
     await team.save()
     await territory.save()
@@ -83,10 +92,10 @@ export const transferTerritory = async (req, res, next)=>{
       areQuestionsSeeded, 
       score 
     } = team;
-
+    const { name: planetName, requiredScore, subterritories, isCaptured, ownerName } = territory;
     return res.status(200).json({
       success: true,
-      territory,
+      territory: { name: planetName, requiredScore, subterritories, isCaptured, ownerName },
       team: { name, territories, lobbyId, state, areQuestionsSeeded, score },
     })
   } catch(error){

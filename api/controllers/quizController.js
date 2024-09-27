@@ -216,7 +216,7 @@ export const submitQuiz = async (req, res, next)=>{
       }
     }
     
-    team.state = gameStates.idle;
+    team.state = gameStates.gameOver;
 
     await team.save();
 

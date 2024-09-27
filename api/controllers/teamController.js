@@ -42,7 +42,6 @@ export const getTeamData = async (req, res, next)=>{
   try {
     const team = await teamModel.findById(teamId);
     return res.status(200).json({
-      id: team._id,
       lobbyId: team.lobby_id,
       name: team.name,
       state: team.state,
