@@ -15,11 +15,11 @@ export const createTerritory = async (req, res, next)=>{
       territory.alias = alias;
       await territory.save();
     }
-    const { name, requiredScore, subterritories, isCaptured, ownerName } = territory;
+    const { name, requiredScore, sub, isCaptured, ownerName } = territory;
     return res.status(200).json({
       success: true,
       message: "territory created successfully",
-      territory: { name, requiredScore, subterritories, isCaptured, ownerName },
+      territory: { name, requiredScore, subterritories: sub, isCaptured, ownerName },
     });
   } catch(error){
     return next(error);

@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { verifyAdmin } from "../../middlewares/verifyAdmin.js";
 import { verifyUniqueLobby } from "../../middlewares/verifyUnique.js";
-import { createLobby, deleteLobby, getAvailableLobbies, getLobbyData } from "../../controllers/lobbyController.js";
+import { createLobby, deleteLobby, getAllLobbies, getAvailableLobbies, getLobbyData } from "../../controllers/lobbyController.js";
 import { verifyLobbyExistsByName } from "../../middlewares/verifyExists.js";
 import { verifyLobbyState } from "../../middlewares/verifyState.js";
 import { gameStates } from "../../../constants.js";
@@ -27,6 +27,11 @@ router.route("/").get(
   verifyAdmin,
   verifyLobbyExistsByName,
   getLobbyData
+)
+
+router.route("/all").get(
+  verifyAdmin,
+  getAllLobbies
 )
 
 /**

@@ -1,5 +1,6 @@
 import { gameStates } from "../../constants.js";
 import lobbyModel from "../models/lobbyModel.js";
+import { CustomError } from "../utils/functions.js";
 
 export const createLobby = async (req, res, next) => {
   const lobbyName = req.body.lobbyname;
@@ -23,6 +24,19 @@ export const createLobby = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const getAllLobbies = async (req, res, next)=>{
+  try {
+    const lobbies = await lobbyModel.find();
+    return res.status(200).json({
+      success: true,
+      lobbies,
+    })
+  } catch(error){
+    return next(error)
+  }
+  
+}
 
 /////////////////////////////////////////////////////////
 export const getLobbyData = async (req, res, next)=>{
