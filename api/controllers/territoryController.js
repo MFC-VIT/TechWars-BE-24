@@ -74,6 +74,7 @@ export const transferTerritory = async (req, res, next)=>{
     // const lobby = await lobbyModel.findById(team.lobby_id);
 
     if (territory.isCaptured){
+      const prevTeam = await teamModel.findById(territory.capturedBy)
       const prevScore = territory.requiredScore;
       if (teamScore < prevScore) return next(CustomError(400, "Insufficiant Score"));
       const theirTerritories = prevTeam.territories;
