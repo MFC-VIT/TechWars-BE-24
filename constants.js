@@ -14,6 +14,6 @@ export const questionStates = Object.freeze({
   attempting: "attempting",
 });
 
-export const questionToSeed = 300; // for each team
+export const questionToSeed = 400; // for each team
 
 //testing
