@@ -203,7 +203,7 @@ const seed = async ()=>{
   }
 }
 
-// seed();
+seed();
 
 const nameAliasMap = territories.reduce((map, territory) => {
   map[territory.name] = territory.alias;

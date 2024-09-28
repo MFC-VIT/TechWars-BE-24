@@ -1,0 +1,264 @@
+[{
+  "_id": {
+    "$oid": "66f7897413b95c4d95a59fbc"
+  },
+  "name": "BASKETBALL COURT (BEHIND CS HALL)",
+  "alias": "basketball_court_cs",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897413b95c4d95a59fc0"
+  },
+  "name": "SJT FOODYS",
+  "alias": "sjt_foodys",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897413b95c4d95a59fc4"
+  },
+  "name": "FOODYS",
+  "alias": "foodys",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897413b95c4d95a59fc8"
+  },
+  "name": "GDN",
+  "alias": "gdn",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897413b95c4d95a59fca"
+  },
+  "name": "TT MAIN GATE",
+  "alias": "tt_main_gate",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fce"
+  },
+  "name": "SJT ANNEXE",
+  "alias": "sjt_annexe",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fd0"
+  },
+  "name": "CBMR",
+  "alias": "cbmr",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fd2"
+  },
+  "name": "APPLES",
+  "alias": "apples",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fd4"
+  },
+  "name": "LIBRARY SUBMISSION AREA",
+  "alias": "library_submission",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fd6"
+  },
+  "name": "FLAG KC LAWN",
+  "alias": "kc_lawn",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fd8"
+  },
+  "name": "ARCHITECTURE BLOCK LAWN",
+  "alias": "architecture_lawn",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fdc"
+  },
+  "name": "GREENOS",
+  "alias": "greenos",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fde"
+  },
+  "name": "BALAJI",
+  "alias": "balaji",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fe0"
+  },
+  "name": "DOMINOS",
+  "alias": "dominos",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fe2"
+  },
+  "name": "F-BLOCK LH ATM",
+  "alias": "fblock_lh_atm",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fe4"
+  },
+  "name": "GATE 1A",
+  "alias": "gate_1a",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fe6"
+  },
+  "name": "OPTICIAN SHOP",
+  "alias": "optician_shop",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fe8"
+  },
+  "name": "MADRAS COFFEE SHOP",
+  "alias": "madras_coffee_shop",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59fee"
+  },
+  "name": "SJT BACK ENTRY",
+  "alias": "sjt_back_entry",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59ff0"
+  },
+  "name": "SMV BACK GATE",
+  "alias": "smv_back_gate",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59ff2"
+  },
+  "name": "PRP SIDE GATE",
+  "alias": "prp_side_gate",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59ff4"
+  },
+  "name": "PRP MAIN GATE",
+  "alias": "prp_main_gate",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59ff6"
+  },
+  "name": "SJT GROUND",
+  "alias": "sjt_ground",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f7897513b95c4d95a59ff8"
+  },
+  "name": "ORGAN DONOR BUILDING",
+  "alias": "organ_donor_building",
+  "requiredScore": 0,
+  "subterritories": [],
+  "isCaptured": false,
+  "__v": 0
+}]
