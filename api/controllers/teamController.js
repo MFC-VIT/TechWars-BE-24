@@ -268,7 +268,7 @@ export const migrateTeam = async (req, res, next)=>{
     
     lobby.teams.push({
       teamId: team._id,
-      score: team.score
+      // score: team.score
     })
     
     team.lobby_id = lobby._id;
@@ -324,7 +324,7 @@ export const forceMigrateTeam = async (req, res, next)=>{
     
     lobby.teams.push({
       teamId: team._id,
-      score: team.score
+      // score: team.score
     })
 
     team.lobby_id = lobby._id;

@@ -546,11 +546,11 @@ export const questions = [
     "points": 100
   },
   {
-    "id": 79,
-    "question": "Which method is used to add an item to the end of a list in Python?",
-    "options": ["append()", "add()", "insert()", "extend()"],
-    "answer": "append()",
-    "points": 100
+      "id": 79,
+      "question": "Given a NumPy array `a = np.array([1, 2, 3, 4, 5])`, what does `a[a > 2]` return?",
+      "options": ["[3, 4, 5]", "[1, 2, 3]", "Error", "[2, 3, 4]"],
+      "answer": "[3, 4, 5]",
+      "points": 100
   },
   {
     "id": 80,
@@ -953,11 +953,11 @@ export const questions = [
     },
     {
       "id": 137,
-      "question": "What is the correct way to format a string using f-strings?",
+      "question": "In Python, what is the most efficient method for embedding the value of a variable directly within a string for runtime evaluation?",
       "options": ["f'My name is {name}'", "format('My name is {name}')", "My name is {name}", "None of the above"],
       "answer": "f'My name is {name}'",
       "points": 100
-    },
+    },    
     {
       "id": 138,
       "question": "Which of the following is NOT a valid way to comment in Python?",
@@ -967,18 +967,18 @@ export const questions = [
     },
     {
       "id": 139,
-      "question": "What will be the output of 'print(\"Hello\" + \" World\")'?",
+      "question": "Considering how Python handles string concatenation and memory allocation, what will be the result of executing `print(\"Hello\" + \" World\")`?",
       "options": ["Hello World", "HelloWorld", "Error", "Hello + World"],
       "answer": "Hello World",
       "points": 100
-    },
+    },    
     {
       "id": 140,
-      "question": "Which method can be used to join a list of strings into a single string?",
+      "question": "In Python, which method is specifically designed for concatenating elements of an iterable, such as a list of strings, into a single string while allowing a delimiter to be specified?",
       "options": ["join()", "concat()", "combine()", "merge()"],
       "answer": "join()",
       "points": 100
-    },
+    },    
     {
       "id": 141,
       "question": "Which keyword is used to define a subclass in Python?",
@@ -996,7 +996,7 @@ export const questions = [
     {
       "id": 143,
       "question": "Which of the following can be used to catch exceptions in Python?",
-      "options": ["try/except", "catch", "handle", "None of the above"],
+      "options": ["try/except", "catch", "handle", "try/catch"],
       "answer": "try/except",
       "points": 100
     },
@@ -1030,11 +1030,11 @@ export const questions = [
     },
     {
       "id": 148,
-      "question": "Which function can be used to convert a list to a tuple?",
+      "question": "In Python, which built-in function is used to transform a mutable sequence like a list into an immutable sequence such as a tuple, preserving the order of elements?",
       "options": ["tuple()", "list()", "convert()", "None of the above"],
       "answer": "tuple()",
       "points": 100
-    },
+    },    
     {
       "id": 149,
       "question": "Which keyword is used to create a constant in Python?",
@@ -1044,11 +1044,11 @@ export const questions = [
     },
     {
       "id": 150,
-      "question": "What will be the output of 'print([1, 2, 3] + [4, 5])'?",
+      "question": "What will be the output when concatenating the result of two generator expressions: `print(list((x for x in [1, 2, 3])) + list((y for y in [4, 5])))`?",
       "options": ["[1, 2, 3, 4, 5]", "[5, 4, 3, 2, 1]", "Error", "[1, 2, 3][4, 5]"],
       "answer": "[1, 2, 3, 4, 5]",
       "points": 100
-    },
+    },    
     {
       "id": 151,
       "question": "Which of the following is used to perform a bitwise AND operation?",
@@ -1072,15 +1072,15 @@ export const questions = [
     },
     {
       "id": 154,
-      "question": "Which method is used to count the occurrences of an element in a list?",
+      "question": "In Python, which list method efficiently returns the number of times a specific element appears in the list, while accounting for potential performance impacts on large datasets?",
       "options": ["count()", "occurrences()", "find()", "index()"],
       "answer": "count()",
       "points": 100
-    },
+    },    
     {
       "id": 155,
-      "question": "What will be the output of 'print('abc'.upper())'?",
-      "options": ["ABC", "Abc", "Error", "None"],
+      "question": "In Python, what will be the output of the expression `''.join([chr(i) for i in range(97, 100)]).upper()`?",
+      "options": ["ABC", "abc", "Error", "None"],
       "answer": "ABC",
       "points": 100
     },
@@ -1128,9 +1128,9 @@ export const questions = [
     },
     {
       "id": 162,
-      "question": "What will be the output of 'print(len(\"abc\"))'?",
-      "options": ["3", "2", "4", "None"],
-      "answer": "3",
+      "question": "What will be the output of 'print(len(\"a bc\"))'?",
+      "options": ["3", "2", "4", "1"],
+      "answer": "4",
       "points": 100
     },
     {
@@ -1157,7 +1157,7 @@ export const questions = [
     {
       "id": 166,
       "question": "How do you access the first element of a list?",
-      "options": ["list[0]", "list.first()", "list.get(0)", "list(0)"],
+      "options": ["list[0]", "list.first()", "list.get(0)", "None of The Above"],
       "answer": "list[0]",
       "points": 100
     },
@@ -1289,9 +1289,9 @@ export const questions = [
     },
     {
       "id": 185,
-      "question": "What will be the output of 'print([1, 2, 3] == [1, 2, 3])'?",
+      "question": "What will be the output of 'print([1, 2, 3] = [1, 2, 3])'?",
       "options": ["True", "False", "None", "Error"],
-      "answer": "True",
+      "answer": "Error",
       "points": 100
     },
     {
@@ -1398,8 +1398,1915 @@ export const questions = [
       "options": ["module ModuleName:", "def ModuleName:", "import ModuleName", "None of the above"],
       "answer": "None of the above",
       "points": 100
-    }
-  
+    },
+    {
+      "id": 201,
+      "question": "Which of the following is a correct characteristic of Python's garbage collection?",
+      "options": ["It uses reference counting", "It manually deallocates memory", "It only uses mark-and-sweep algorithms", "It does not support garbage collection"],
+      "answer": "It uses reference counting",
+      "points": 100
+  },
+  {
+      "id": 202,
+      "question": "What is the purpose of the Global Interpreter Lock (GIL) in Python?",
+      "options": [
+          "To prevent multiple threads from executing Python bytecode at once",
+          "To speed up multi-threaded applications",
+          "To enforce strict type checking",
+          "To enable dynamic typing"
+      ],
+      "answer": "To prevent multiple threads from executing Python bytecode at once",
+      "points": 100
+  },
+  {
+      "id": 203,
+      "question": "Which of the following Python libraries is best suited for high-performance numerical computations?",
+      "options": ["pandas", "matplotlib", "NumPy", "Django"],
+      "answer": "NumPy",
+      "points": 100
+  },
+  {
+      "id": 204,
+      "question": "In Python, what happens when you attempt to modify an object while iterating over it using a `for` loop?",
+      "options": [
+          "The iterator behavior becomes unpredictable",
+          "The loop gracefully handles the changes",
+          "An exception is raised",
+          "The loop restarts"
+      ],
+      "answer": "The iterator behavior becomes unpredictable",
+      "points": 100
+  },
+  {
+      "id": 205,
+      "question": "What is the difference between deep copy and shallow copy in Python?",
+      "options": [
+          "Deep copy copies objects recursively, shallow copy does not",
+          "Shallow copy copies objects recursively, deep copy does not",
+          "Shallow copy creates a new object, deep copy does not",
+          "Deep copy only copies mutable objects, shallow copy copies all"
+      ],
+      "answer": "Deep copy copies objects recursively, shallow copy does not",
+      "points": 100
+  },
+  {
+      "id": 206,
+      "question": "What is a generator in Python and why is it used?",
+      "options": [
+          "It is a function that returns an iterable sequence of results without storing them in memory",
+          "It is a function that returns all results at once",
+          "It is a function used only for string manipulation",
+          "It is a function that creates parallel threads"
+      ],
+      "answer": "It is a function that returns an iterable sequence of results without storing them in memory",
+      "points": 100
+  },
+  {
+      "id": 207,
+      "question": "What is the difference between `staticmethod()` and `classmethod()` in Python?",
+      "options": [
+          "`staticmethod()` does not take any arguments, `classmethod()` takes a class reference as its first argument",
+          "`classmethod()` does not take any arguments, `staticmethod()` takes an instance reference as its first argument",
+          "`staticmethod()` must return a value, `classmethod()` cannot return any value",
+          "`classmethod()` can only be used for private methods, `staticmethod()` can be used for public methods"
+      ],
+      "answer": "`staticmethod()` does not take any arguments, `classmethod()` takes a class reference as its first argument",
+      "points": 100
+  },
+  {
+      "id": 208,
+      "question": "Which of the following is an advantage of using duck typing in Python?",
+      "options": [
+          "It allows for faster execution as types are checked at compile time",
+          "It promotes flexibility by focusing on an object's behavior rather than its explicit type",
+          "It enforces strict type checking, ensuring better type safety",
+          "It restricts the use of objects to only predefined types, reducing potential errors"
+      ],
+      "answer": "It promotes flexibility by focusing on an object's behavior rather than its explicit type",
+      "points": 100
+  },    
+  {
+      "id": 209,
+      "question": "Which of the following Python data structures is optimized for lookups by keys?",
+      "options": ["List", "Tuple", "Set", "Dictionary"],
+      "answer": "Dictionary",
+      "points": 100
+  },
+  {
+      "id": 210,
+      "question": "Which Python decorator is used to define a function as a property in a class?",
+      "options": ["@classmethod", "@staticmethod", "@property", "@decorator"],
+      "answer": "@property",
+      "points": 100
+  },
+  {
+      "id": 211,
+      "question": "What is the purpose of the 'assert' statement in Python?",
+      "options": [
+          "To test whether a condition is true, and raise an exception if it is not",
+          "To create a breakpoint in code",
+          "To log the execution flow of the program",
+          "To define constants"
+      ],
+      "answer": "To test whether a condition is true, and raise an exception if it is not",
+      "points": 100
+  },
+  {
+      "id": 212,
+      "question": "Which of the following operations does NOT create a new list in Python?",
+      "options": [
+          "List slicing (e.g., list[:])",
+          "Using the copy() method",
+          "Using the append() method",
+          "Using list() to create a copy"
+      ],
+      "answer": "Using the append() method",
+      "points": 100
+  },
+  {
+      "id": 213,
+      "question": "Which method can be used to check for a specific key in a Python dictionary?",
+      "options": ["get()", "in", "exists()", "has_key()"],
+      "answer": "in",
+      "points": 100
+  },
+  {
+      "id": 214,
+      "question": "Which of the following is NOT true about Python’s exception handling?",
+      "options": [
+          "The 'finally' block always executes, even if an exception is raised",
+          "The 'except' block can catch multiple exceptions",
+          "You can only catch one type of exception in a single 'except' block",
+          "You can raise an exception using the 'raise' statement"
+      ],
+      "answer": "You can only catch one type of exception in a single 'except' block",
+      "points": 100
+  },
+  {
+      "id": 215,
+      "question": "In Python, which of the following is the correct way to open a file for both reading and writing?",
+      "options": ["'r'", "'w'", "'rw'", "'r+'"],
+      "answer": "'r+'",
+      "points": 100
+  },
+  {
+      "id": 216,
+      "question": "Which of the following best describes list comprehension in Python?",
+      "options": [
+          "A concise way to create a list by specifying the elements directly",
+          "A method of reversing a list",
+          "A concise way to generate lists by filtering or transforming existing iterables",
+          "A feature that optimizes list performance"
+      ],
+      "answer": "A concise way to generate lists by filtering or transforming existing iterables",
+      "points": 100
+  },
+  {
+    "id": 217,
+    "question": "What is the main advantage of using a generator in Python?",
+    "options": [
+        "It returns all values at once",
+        "It saves memory by yielding one item at a time",
+        "It is faster than normal functions",
+        "It is used for multi-threading"
+    ],
+    "answer": "It saves memory by yielding one item at a time",
+    "points": 100
+},
+  {
+      "id": 218,
+      "question": "What is the expected behavior when an exception is raised inside a Python generator?",
+      "options": [
+          "The generator stops executing and raises the exception",
+          "The generator continues with the next value",
+          "The exception is ignored",
+          "The generator restarts from the beginning"
+      ],
+      "answer": "The generator stops executing and raises the exception",
+      "points": 100
+  },
+  {
+    "id": 219,
+    "question": "Which Python function is used to dynamically load a module during runtime?",
+    "options": [
+        "import_module()",
+        "load_module()",
+        "dynamic_import()",
+        "load_runtime_module()"
+    ],
+    "answer": "import_module()",
+    "points": 100
+  },
+  {
+      "id": 220,
+      "question": "Which of the following is true about Python's handling of strings?",
+      "options": [
+          "Strings are mutable in Python",
+          "Strings can be modified in-place",
+          "Strings are immutable in Python",
+          "Strings are automatically converted to lists"
+      ],
+      "answer": "Strings are immutable in Python",
+      "points": 100
+  },
+        {
+            "id": 221,
+            "question": "Which method can be used to create a shallow copy of a list in Python?",
+            "options": ["copy()", "deepcopy()", "clone()", "replicate()"],
+            "answer": "copy()",
+            "points": 100
+        },
+        {
+            "id": 222,
+            "question": "What is the result of the expression: [i for i in range(5) if i % 2 == 0]?",
+            "options": ["[0, 1, 2, 3, 4]", "[0, 2, 4]", "[1, 3]", "[1, 2, 3, 4]"],
+            "answer": "[0, 2, 4]",
+            "points": 100
+        },
+        {
+            "id": 223,
+            "question": "Which of the following Python data structures is immutable?",
+            "options": ["List", "Dictionary", "Tuple", "Set"],
+            "answer": "Tuple",
+            "points": 100
+        },
+        {
+            "id": 224,
+            "question": "What is the purpose of the 'nonlocal' keyword in Python?",
+            "options": [
+                "To modify a global variable",
+                "To indicate a function is recursive",
+                "To access a variable in the outer enclosing function",
+                "To indicate a class method"
+            ],
+            "answer": "To access a variable in the outer enclosing function",
+            "points": 100
+        },
+        {
+            "id": 225,
+            "question": "What does the expression 'is' operator check in Python?",
+            "options": [
+                "If two variables point to the same object",
+                "If two values are equal",
+                "If two objects are different",
+                "If a value is in a list"
+            ],
+            "answer": "If two variables point to the same object",
+            "points": 100
+        },
+        {
+            "id": 226,
+            "question": "In Python, what will happen if a function doesn’t have a return statement?",
+            "options": ["The function will return None", "The function will return 0", "The function will raise an error", "The function will return an empty string"],
+            "answer": "The function will return None",
+            "points": 100
+        },
+        {
+          "id": 227,
+          "question": "Which OOP principle in Python is being used when a subclass overrides a method from its superclass?",
+          "options": ["Encapsulation", "Abstraction", "Polymorphism", "Inheritance"],
+          "answer": "Polymorphism",
+          "points": 100
+        },        
+        {
+            "id": 228,
+            "question": "What will be the result of the expression: 3 ** 2 % 2?",
+            "options": ["1", "9", "0", "3"],
+            "answer": "1",
+            "points": 100
+        },
+        {
+            "id": 229,
+            "question": "Which Python function is used to retrieve the attributes of an object?",
+            "options": ["dir()", "attr()", "getattr()", "properties()"],
+            "answer": "dir()",
+            "points": 100
+        },
+        {
+            "id": 230,
+            "question": "Which of these types is not hashable in Python?",
+            "options": ["int", "tuple", "list", "string"],
+            "answer": "list",
+            "points": 100
+        },
+        {
+            "id": 231,
+            "question": "What is a lambda function in Python?",
+            "options": [
+                "A function that takes only one argument",
+                "A shorthand for defining anonymous functions",
+                "A function with no return value",
+                "A function that returns another function"
+            ],
+            "answer": "A shorthand for defining anonymous functions",
+            "points": 100
+        },
+        {
+            "id": 232,
+            "question": "Which of the following is not a valid keyword in Python?",
+            "options": ["pass", "continue", "exit", "assert"],
+            "answer": "exit",
+            "points": 100
+        },
+        {
+            "id": 233,
+            "question": "What will the expression list('hello') return?",
+            "options": ["['h', 'e', 'l', 'l', 'o']", "['hello']", "['h', 'hello']", "['h', 'e', 'hello']"],
+            "answer": "['h', 'e', 'l', 'l', 'o']",
+            "points": 100
+        },
+        {
+            "id": 234,
+            "question": "Which method is used to remove and return an item from a Python set?",
+            "options": ["remove()", "pop()", "discard()", "clear()"],
+            "answer": "pop()",
+            "points": 100
+        },
+        {
+            "id": 235,
+            "question": "Which built-in function in Python can be used to convert a string to a float?",
+            "options": ["float()", "int()", "str()", "eval()"],
+            "answer": "float()",
+            "points": 100
+        },
+        {
+            "id": 236,
+            "question": "Which module in Python can be used to create and handle complex numbers?",
+            "options": ["math", "random", "cmath", "numbers"],
+            "answer": "cmath",
+            "points": 100
+        },
+        {
+            "id": 237,
+            "question": "What does the 'yield' keyword do in Python?",
+            "options": [
+                "Returns a value and terminates the function",
+                "Pauses the function and returns an iterator",
+                "Declares a global variable",
+                "Ends a loop"
+            ],
+            "answer": "Pauses the function and returns an iterator",
+            "points": 100
+        },
+        {
+            "id": 238,
+            "question": "What will be the result of the following code: 'abc'.join(['1', '2', '3'])?",
+            "options": ["1abc2abc3", "abcabcabc", "abc", "123abc"],
+            "answer": "1abc2abc3",
+            "points": 100
+        },
+        {
+            "id": 239,
+            "question": "How can you retrieve the keys from a Python dictionary?",
+            "options": ["Using the keys() method", "Using the values() method", "Using the items() method", "Using the get() method"],
+            "answer": "Using the keys() method",
+            "points": 100
+        },
+        {
+            "id": 240,
+            "question": "In Python, what is the time complexity of accessing an element in a dictionary?",
+            "options": ["O(n)", "O(log n)", "O(1)", "O(n^2)"],
+            "answer": "O(1)",
+            "points": 100
+        },
+        {
+            "id": 241,
+            "question": "Which function in Python can be used to read an entire file into a list of lines?",
+            "options": ["readlines()", "read()", "readfile()", "readtext()"],
+            "answer": "readlines()",
+            "points": 100
+        },
+        {
+            "id": 242,
+            "question": "What is the output of the following code: print(type(lambda x: x))?",
+            "options": ["<class 'function'>", "<class 'lambda'>", "<class 'method'>", "<class 'object'>"],
+            "answer": "<class 'function'>",
+            "points": 100
+        },
+        {
+            "id": 243,
+            "question": "Which of the following functions is used to sort a list in-place in Python?",
+            "options": ["sorted()", "sort()", "order()", "arrange()"],
+            "answer": "sort()",
+            "points": 100
+        },
+        {
+            "id": 244,
+            "question": "Which function is used to dynamically import a module in Python?",
+            "options": ["importlib.import_module()", "import()", "exec()", "compile()"],
+            "answer": "importlib.import_module()",
+            "points": 100
+        },
+        {
+            "id": 245,
+            "question": "Which Python built-in function can be used to execute a string as Python code?",
+            "options": ["exec()", "eval()", "compile()", "run()"],
+            "answer": "exec()",
+            "points": 100
+        },
+        {
+            "id": 246,
+            "question": "Which Python function can be used to combine multiple iterators?",
+            "options": ["zip()", "map()", "filter()", "reduce()"],
+            "answer": "zip()",
+            "points": 100
+        },
+        {
+            "id": 247,
+            "question": "What will be the result of the following code: len({1, 2, 3, 3, 4})?",
+            "options": ["5", "4", "6", "3"],
+            "answer": "4",
+            "points": 100
+        },
+        {
+            "id": 248,
+            "question": "Which method in Python is used to split a string into a list?",
+            "options": ["split()", "join()", "partition()", "separate()"],
+            "answer": "split()",
+            "points": 100
+        },
+        {
+            "id": 249,
+            "question": "What does the term 'duck typing' mean in Python?",
+            "options": [
+                "Type inference based on function signatures",
+                "A form of dynamic typing based on object behavior",
+                "An implementation of static typing",
+                "A mechanism to identify keyword arguments"
+            ],
+            "answer": "A form of dynamic typing based on object behavior",
+            "points": 100
+        },
+        {
+          "id": 250,
+          "question": "How does the __repr__() method in Python differ from the __str__() method?",
+          "options": [
+              "The __repr__() method is used for debugging and should ideally return a valid Python expression, while __str__() is meant for a readable string representation for end-users",
+              "The __repr__() method converts an object into a string, while __str__() converts it into a list",
+              "The __repr__() method checks for string equality, while __str__() is used for type casting",
+              "There is no difference; both methods perform the same function"
+          ],
+          "answer": "The __repr__() method is used for debugging and should ideally return a valid Python expression, while __str__() is meant for a readable string representation for end-users",
+          "points": 100
+      },        
+      {
+          "id": 251,
+          "question": "In Python, what happens if a class method is decorated with @staticmethod and is called on an instance of the class?",
+          "options": [
+              "It raises a TypeError because static methods can only be called on the class itself",
+              "It executes normally without needing any reference to the instance or class",
+              "It modifies the instance's attributes",
+              "It binds the instance as the first argument to the static method"
+          ],
+          "answer": "It executes normally without needing any reference to the instance or class",
+          "points": 100
+      },        
+          {
+              "id": 252,
+              "question": "What does the 'with' statement in Python help to accomplish?",
+              "options": [
+                  "It simplifies exception handling",
+                  "It simplifies file handling by automatically closing the file",
+                  "It defines a function's scope",
+                  "It handles recursion"
+              ],
+              "answer": "It simplifies file handling by automatically closing the file",
+              "points": 100
+          },
+          {
+              "id": 253,
+              "question": "Which method would you use to combine two dictionaries in Python 3.9+?",
+              "options": ["merge()", "update()", "combine()", "The | operator"],
+              "answer": "The | operator",
+              "points": 100
+          },
+          {
+              "id": 254,
+              "question": "What is the purpose of the __init__.py file in Python packages?",
+              "options": [
+                  "It marks the directory as a Python package",
+                  "It initializes global variables",
+                  "It is required to define modules",
+                  "It prevents modules from being imported"
+              ],
+              "answer": "It marks the directory as a Python package",
+              "points": 100
+          },
+          {
+              "id": 255,
+              "question": "Which of these methods is used to start a thread in Python?",
+              "options": ["run()", "begin()", "start()", "execute()"],
+              "answer": "start()",
+              "points": 100
+          },
+          {
+              "id": 256,
+              "question": "In Python, which function returns an iterable of tuples containing the index and the values of a list?",
+              "options": ["enumerate()", "zip()", "map()", "filter()"],
+              "answer": "enumerate()",
+              "points": 100
+          },
+          {
+              "id": 257,
+              "question": "Which of the following decorators is used to define a static method in Python?",
+              "options": ["@staticmethod", "@classmethod", "@function", "@staticmethodmethod"],
+              "answer": "@staticmethod",
+              "points": 100
+          },
+          {
+              "id": 258,
+              "question": "Which Python function can be used to determine the size of an object in bytes?",
+              "options": ["sys.getsizeof()", "len()", "sizeof()", "os.getsize()"],
+              "answer": "sys.getsizeof()",
+              "points": 100
+          },
+          {
+              "id": 259,
+              "question": "What does the term 'GIL' stand for in Python?",
+              "options": [
+                  "Global Inheritance List",
+                  "General Interpreter Limit",
+                  "Global Interpreter Lock",
+                  "Global Index Limit"
+              ],
+              "answer": "Global Interpreter Lock",
+              "points": 100
+          },
+          {
+              "id": 260,
+              "question": "What is the output of the expression: (lambda x: x**2)(3)?",
+              "options": ["3", "6", "9", "None"],
+              "answer": "9",
+              "points": 100
+          },
+          {
+              "id": 261,
+              "question": "Which method is used to check if all elements of an iterable are true in Python?",
+              "options": ["all()", "any()", "is_true()", "check_all()"],
+              "answer": "all()",
+              "points": 100
+          },
+          {
+              "id": 262,
+              "question": "Which of the following can be used to serialize Python objects into JSON?",
+              "options": ["json.dumps()", "json.loads()", "json.dump()", "pickle.dump()"],
+              "answer": "json.dumps()",
+              "points": 100
+          },
+          {
+            "id": 263,
+            "question": "What is the correct way to install a specific version of a Python package using pip?",
+            "options": [
+                "pip install package==1.0.0",
+                "pip install package -v1.0.0",
+                "pip install package:1.0.0",
+                "pip install package/version=1.0.0"
+            ],
+            "answer": "pip install package==1.0.0",
+            "points": 100
+        },        
+          {
+              "id": 264,
+              "question": "Which keyword is used in Python to declare an abstract base class?",
+              "options": ["abstract", "abc", "class", "ABCMeta"],
+              "answer": "ABCMeta",
+              "points": 100
+          },
+          {
+              "id": 265,
+              "question": "In Python, how can you read the first line of a text file?",
+              "options": ["readline()", "readlines()[0]", "read(1)", "get_line()"],
+              "answer": "readline()",
+              "points": 100
+          },
+          {
+              "id": 266,
+              "question": "Which function is used to apply a function to every item in an iterable in Python?",
+              "options": ["map()", "apply()", "filter()", "reduce()"],
+              "answer": "map()",
+              "points": 100
+          },
+          {
+              "id": 267,
+              "question": "What is the correct syntax to raise an exception in Python?",
+              "options": ["raise Exception()", "throw Exception()", "error Exception()", "call Exception()"],
+              "answer": "raise Exception()",
+              "points": 100
+          },
+          {
+              "id": 268,
+              "question": "Which Python built-in function is used to open a file?",
+              "options": ["open()", "file()", "read()", "get()"],
+              "answer": "open()",
+              "points": 100
+          },
+          {
+              "id": 269,
+              "question": "What will be the output of this expression: {1, 2, 3} & {2, 3, 4}?",
+              "options": ["{2, 3}", "{1, 4}", "{1, 2, 3, 4}", "{}"],
+              "answer": "{2, 3}",
+              "points": 100
+          },
+          {
+              "id": 270,
+              "question": "Which of the following methods is used to add an element to a set?",
+              "options": ["add()", "append()", "insert()", "put()"],
+              "answer": "add()",
+              "points": 100
+          },
+          {
+              "id": 271,
+              "question": "Which Python function is used to check if an object is an instance of a class?",
+              "options": ["isinstance()", "type()", "classof()", "checktype()"],
+              "answer": "isinstance()",
+              "points": 100
+          },
+          {
+              "id": 272,
+              "question": "In Python, which keyword is used to make a variable global?",
+              "options": ["global", "nonlocal", "static", "globalvar"],
+              "answer": "global",
+              "points": 100
+          },
+          {
+              "id": 273,
+              "question": "What does the 'pass' statement do in Python?",
+              "options": [
+                  "Does nothing; it's a null operation",
+                  "Skips a function",
+                  "Exits a loop",
+                  "Raises an exception"
+              ],
+              "answer": "Does nothing; it's a null operation",
+              "points": 100
+          },
+          {
+              "id": 274,
+              "question": "Given a NumPy array `a = np.array([[1, 2], [3, 4], [5, 6]])`, what will `a[:, 1]` return?",
+              "options": ["[1, 3, 5]", "[2, 4, 6]", "[[1, 2], [3, 4], [5, 6]]", "Error"],
+              "answer": "[2, 4, 6]",
+              "points": 300
+          },
+          {
+              "id": 275,
+              "question": "Which of the following Python operators checks if a value is a member of a sequence?",
+              "options": ["in", "is", "==", "contains"],
+              "answer": "in",
+              "points": 100
+          },
+          {
+              "id": 276,
+              "question": "What is the use of the super() function in Python?",
+              "options": [
+                  "To call a method from the parent class",
+                  "To return a superclass",
+                  "To create an instance of the current class",
+                  "To define a global variable"
+              ],
+              "answer": "To call a method from the parent class",
+              "points": 100
+          },
+          {
+              "id": 277,
+              "question": "Which method is used to retrieve a value from a Python dictionary by its key?",
+              "options": ["get()", "find()", "lookup()", "search()"],
+              "answer": "get()",
+              "points": 100
+          },            
+          {
+              "id": 278,
+              "question": "Which of the following is not a valid Python data type?",
+              "options": ["array", "list", "tuple", "set"],
+              "answer": "array",
+              "points": 100
+          },
+          {
+              "id": 279,
+              "question": "How can you remove duplicates from a Python list while maintaining order?",
+              "options": [
+                  "list(dict.fromkeys())",
+                  "set()",
+                  "filter()",
+                  "list.remove_duplicates()"
+              ],
+              "answer": "list(dict.fromkeys())",
+              "points": 100
+          },
+          {
+              "id": 280,
+              "question": "Which of the following is true about Python functions?",
+              "options": [
+                  "They must always return a value",
+                  "They can have multiple return statements",
+                  "They cannot be nested",
+                  "They are automatically recursive"
+              ],
+              "answer": "They can have multiple return statements",
+              "points": 100
+          },
+          {
+              "id": 281,
+              "question": "Which Python package is used to create graphical user interfaces (GUIs)?",
+              "options": ["Tkinter", "Matplotlib", "PyGame", "Scikit-learn"],
+              "answer": "Tkinter",
+              "points": 100
+          },
+          {
+              "id": 282,
+              "question": "What is the output of the expression: [x for x in range(5) if x % 2 == 0]?",
+              "options": ["[0, 2, 4]", "[0, 1, 2, 3, 4]", "[1, 3]", "[5, 4, 3, 2, 1]"],
+              "answer": "[0, 2, 4]",
+              "points": 100
+          },
+          {
+              "id": 283,
+              "question": "Which of these methods is used to append elements from one list to another?",
+              "options": ["extend()", "append()", "add()", "insert()"],
+              "answer": "extend()",
+              "points": 100
+          },
+          {
+              "id": 284,
+              "question": "Which Python library is most commonly used for numerical computations?",
+              "options": ["NumPy", "Pandas", "SciPy", "Math"],
+              "answer": "NumPy",
+              "points": 100
+          },
+          {
+              "id": 285,
+              "question": "Which statement is true about Python modules?",
+              "options": [
+                  "They are always named with a .mod extension",
+                  "They must be installed via pip",
+                  "They are reusable files containing Python definitions",
+                  "They must be stored in a specific directory"
+              ],
+              "answer": "They are reusable files containing Python definitions",
+              "points": 100
+          },
+          {
+              "id": 286,
+              "question": "In Python, which of the following defines a private method?",
+              "options": ["__method_name", "_method_name", "__methodname__", "__private__"],
+              "answer": "__method_name",
+              "points": 100
+          },
+          {
+              "id": 287,
+              "question": "Which method would you use to remove a key-value pair from a Python dictionary?",
+              "options": ["pop()", "remove()", "delete()", "discard()"],
+              "answer": "pop()",
+              "points": 100
+          },
+          {
+              "id": 288,
+              "question": "What does the zip() function in Python do?",
+              "options": [
+                  "It combines multiple iterables into tuples",
+                  "It compresses a list into a single element",
+                  "It splits a string by a given delimiter",
+                  "It returns an index and an element pair"
+              ],
+              "answer": "It combines multiple iterables into tuples",
+              "points": 100
+          },
+          {
+              "id": 289,
+              "question": "What does the expression isinstance(x, int) check for in Python?",
+              "options": [
+                  "If x is of type int or a subclass of int",
+                  "If x is exactly of type int",
+                  "If x can be converted to an int",
+                  "If x has an integer value"
+              ],
+              "answer": "If x is of type int or a subclass of int",
+              "points": 100
+          },
+          {
+              "id": 290,
+              "question": "Which of the following is a mutable data type in Python?",
+              "options": ["list", "tuple", "string", "int"],
+              "answer": "list",
+              "points": 100
+          },
+          {
+              "id": 291,
+              "question": "In Python, what is a lambda function?",
+              "options": [
+                  "An anonymous function defined with a single expression",
+                  "A function defined within a class",
+                  "A recursive function",
+                  "A higher-order function"
+              ],
+              "answer": "An anonymous function defined with a single expression",
+              "points": 100
+          },
+          {
+              "id": 292,
+              "question": "What does the Python itertools module provide?",
+              "options": [
+                  "Functions for creating iterators for efficient looping",
+                  "A set of tools for GUI development",
+                  "Functions for file handling",
+                  "String manipulation utilities"
+              ],
+              "answer": "Functions for creating iterators for efficient looping",
+              "points": 100
+          },
+          {
+              "id": 293,
+              "question": "What is the difference between 'is' and '==' in Python?",
+              "options": [
+                  "'is' checks identity, '==' checks equality",
+                  "'is' checks type, '==' checks value",
+                  "'is' compares memory locations, '==' compares references",
+                  "'is' can be used only for numbers, '==' can be used for strings"
+              ],
+              "answer": "'is' checks identity, '==' checks equality",
+              "points": 100
+          },
+          {
+              "id": 294,
+              "question": "What does the Python function enumerate() return?",
+              "options": [
+                  "An iterator yielding pairs of index and values from an iterable",
+                  "A dictionary of indices and values",
+                  "An object with all even elements",
+                  "A reversed version of the iterable"
+              ],
+              "answer": "An iterator yielding pairs of index and values from an iterable",
+              "points": 100
+          },
+          {
+              "id": 295,
+              "question": "In Python, what does the built-in function sorted() do?",
+              "options": [
+                  "Returns a sorted list from an iterable",
+                  "Sorts a list in place",
+                  "Sorts strings alphabetically",
+                  "Orders elements numerically only"
+              ],
+              "answer": "Returns a sorted list from an iterable",
+              "points": 100
+          },
+          {
+              "id": 296,
+              "question": "Which Python function can be used to execute a string as Python code?",
+              "options": ["exec()", "eval()", "execute()", "run()"],
+              "answer": "exec()",
+              "points": 100
+          },
+          {
+              "id": 297,
+              "question": "What does the range() function return in Python 3?",
+              "options": [
+                  "A range object, which is an immutable sequence",
+                  "A list of numbers",
+                  "An iterable generator",
+                  "A mutable sequence of integers"
+              ],
+              "answer": "A range object, which is an immutable sequence",
+              "points": 100
+          },
+          {
+              "id": 298,
+              "question": "Which of the following data types in Python is immutable?",
+              "options": ["tuple", "list", "set", "dict"],
+              "answer": "tuple",
+              "points": 100
+          },
+          {
+              "id": 299,
+              "question": "What does the 'nonlocal' keyword do in Python?",
+              "options": [
+                  "It refers to a variable in the nearest enclosing scope",
+                  "It declares a global variable",
+                  "It prevents a variable from being garbage collected",
+                  "It raises an error when a variable is not defined locally"
+              ],
+              "answer": "It refers to a variable in the nearest enclosing scope",
+              "points": 100
+          },
+          {
+              "id": 300,
+              "question": "In Python, what is a generator?",
+              "options": [
+                  "A function that returns an iterator object using yield",
+                  "A function that returns a list of values",
+                  "An iterable object",
+                  "A decorator for creating new functions"
+              ],
+              "answer": "A function that returns an iterator object using yield",
+              "points": 100
+          },
+          {
+            "id": 301,
+            "question": "What will be the output of 'print([1, 2, 3, 4][1:3])'?",
+            "options": ["[1, 2]", "[2, 3]", "[3, 4]", "Error"],
+            "answer": "[2, 3]",
+            "points": 100
+      },
+      {
+            "id": 302,
+            "question": "Which method can be used to combine a list of strings into a single string, separated by a specific delimiter?",
+            "options": ["join()", "concatenate()", "combine()", "merge()"],
+            "answer": "join()",
+            "points": 100
+      },
+      {
+            "id": 303,
+            "question": "What is the time complexity of searching for an element in a list using the 'in' keyword?",
+            "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+            "answer": "O(n)",
+            "points": 100
+      },
+      {
+            "id": 304,
+            "question": "Which of the following is true about Python's garbage collection?",
+            "options": ["It uses reference counting", "It uses a cyclic garbage collector", "Both a and b", "None of the above"],
+            "answer": "Both a and b",
+            "points": 100
+      },
+      {
+            "id": 305,
+            "question": "What will be the output of 'print([i for i in range(5) if i % 2 == 0])'?",
+            "options": ["[0, 1, 2, 3, 4]", "[0, 2, 4]", "[1, 3, 5]", "Error"],
+            "answer": "[0, 2, 4]",
+            "points": 100
+      },
+      {
+            "id": 306,
+            "question": "What will be the output of 'print(\"Hello {0}, welcome to {1}\".format(\"Alice\", \"Wonderland\"))'?",
+            "options": ["Hello Alice, welcome to Wonderland", "Hello {0}, welcome to {1}", "Error", "None of the above"],
+            "answer": "Hello Alice, welcome to Wonderland",
+            "points": 100
+      },
+      {
+            "id": 307,
+            "question": "Which of the following is a correct way to check if a key exists in a dictionary?",
+            "options": ["if key in dict:", "if dict.keyExists(key):", "if dict.contains(key):", "None of the above"],
+            "answer": "if key in dict:",
+            "points": 100
+      },
+      {
+            "id": 308,
+            "question": "Which of the following is the correct syntax to catch multiple exceptions in Python?",
+            "options": ["except (TypeError, ValueError):", "except [TypeError, ValueError]:", "except {TypeError, ValueError}:", "None of the above"],
+            "answer": "except (TypeError, ValueError):",
+            "points": 100
+      },
+      {
+            "id": 309,
+            "question": "Which of the following data structures does Python's 'deque' belong to?",
+            "options": ["collections module", "heapq module", "queue module", "array module"],
+            "answer": "collections module",
+            "points": 100
+      },
+      {
+            "id": 310,
+            "question": "What will be the output of 'print(bool(0), bool([]), bool(\"\"))'?",
+            "options": ["False False False", "True True True", "False True False", "True False False"],
+            "answer": "False False False",
+            "points": 100
+      },
+      {
+            "id": 311,
+            "question": "What will be the output of 'print(5 and 0)'?",
+            "options": ["5", "0", "True", "False"],
+            "answer": "0",
+            "points": 100
+      },
+      {
+            "id": 312,
+            "question": "What is the purpose of the 'global' keyword in Python?",
+            "options": ["It defines a global variable", "It makes a variable refer to the global scope", "It restricts the scope of the variable", "None of the above"],
+            "answer": "It makes a variable refer to the global scope",
+            "points": 100
+      },
+      {
+            "id": 313,
+            "question": "What will be the output of 'print(2 ** 3 ** 2)'?",
+            "options": ["512", "64", "16", "Error"],
+            "answer": "512",
+            "points": 100
+      },
+      {
+            "id": 314,
+            "question": "Which of the following is the correct syntax to open a file in write mode in Python?",
+            "options": ["open('file.txt', 'w')", "open('file.txt', 'r')", "open('file.txt', 'rw')", "None of the above"],
+            "answer": "open('file.txt', 'w')",
+            "points": 100
+      },
+      {
+            "id": 315,
+            "question": "What will be the output of 'print([x**2 for x in range(3)])'?",
+            "options": ["[1, 4, 9]", "[0, 1, 4]", "[1, 2, 3]", "Error"],
+            "answer": "[0, 1, 4]",
+            "points": 100
+      },
+      {
+            "id": 316,
+            "question": "Which of the following functions is used to get a random number between 0 and 1 in Python?",
+            "options": ["rand()", "random()", "random.rand()", "None of the above"],
+            "answer": "random()",
+            "points": 100
+      },
+      {
+            "id": 317,
+            "question": "What is the output of 'print(\"abcdef\"[::2])'?",
+            "options": ["abcdef", "ace", "bdf", "Error"],
+            "answer": "ace",
+            "points": 100
+      },
+      {
+            "id": 318,
+            "question": "What is the output of 'print([1, 2, 3].pop(1))'?",
+            "options": ["1", "2", "[1, 3]", "Error"],
+            "answer": "2",
+            "points": 100
+      },
+      {
+            "id": 319,
+            "question": "Which of the following functions returns a list of tuples, where each tuple contains an index and the value from an iterable?",
+            "options": ["index()", "enumerate()", "zip()", "items()"],
+            "answer": "enumerate()",
+            "points": 100
+      },
+      {
+            "id": 320,
+            "question": "What is the result of 'list(zip([1, 2, 3], [\"a\", \"b\"]))'?",
+            "options": ["[(1, 'a'), (2, 'b'), (3, 'c')]", "[(1, 'a'), (2, 'b')]", "[(1, 'a'), (2, 'b'), (3, None)]", "Error"],
+            "answer": "[(1, 'a'), (2, 'b')]",
+            "points": 100
+      },
+      {
+            "id": 321,
+            "question": "Which method is used to return a dictionary's keys and values as a list of tuples?",
+            "options": ["items()", "values()", "keys()", "None of the above"],
+            "answer": "items()",
+            "points": 100
+      },
+      {
+            "id": 322,
+            "question": "Which of the following methods can be used to update a dictionary with key-value pairs from another dictionary?",
+            "options": ["update()", "merge()", "combine()", "None of the above"],
+            "answer": "update()",
+            "points": 100
+      },
+      {
+            "id": 323,
+            "question": "Which of the following is used to check if an object has a specific attribute?",
+            "options": ["hasattr()", "getattr()", "checkattr()", "None of the above"],
+            "answer": "hasattr()",
+            "points": 100
+      },
+      {
+            "id": 324,
+            "question": "What will be the output of 'print({1, 2} - {2, 3})'?",
+            "options": ["{1, 2, 3}", "{1}", "{2}", "Error"],
+            "answer": "{1}",
+            "points": 100
+      },
+      {
+          "id": 325,
+          "question": "Which of the following methods can be used to remove an item from a dictionary by its key?",
+          "options": ["delete()", "pop()", "remove()", "discard()"],
+          "answer": "pop()",
+          "points": 100
+      },
+      {
+          "id": 326,
+          "question": "What will be the result of 'print(\"python\".capitalize())'?",
+          "options": ["Python", "PYTHON", "python", "Error"],
+          "answer": "Python",
+          "points": 100
+      },
+      {
+          "id": 327,
+          "question": "Which of the following statements will raise an error in Python?",
+          "options": ["1 / 0", "'a' + 1", "int('abc')", "All of the above"],
+          "answer": "All of the above",
+          "points": 100
+      },
+      {
+          "id": 328,
+          "question": "Which keyword is used to create an exception in Python?",
+          "options": ["raise", "throw", "except", "try"],
+          "answer": "raise",
+          "points": 100
+      },
+      {
+          "id": 329,
+          "question": "What is the output of 'print('Hello' * 3)'?",
+          "options": ["Hello", "HelloHelloHello", "Hello3", "Error"],
+          "answer": "HelloHelloHello",
+          "points": 100
+      },
+      {
+          "id": 330,
+          "question": "Which method is used to remove an element from a set in Python?",
+          "options": ["discard()", "delete()", "remove()", "Both a and c"],
+          "answer": "Both a and c",
+          "points": 100
+      },
+      {
+          "id": 331,
+          "question": "What will be the output of 'print(\"Hello\\nWorld\")'?",
+          "options": ["Hello World", "Hello\nWorld", "Error", "None"],
+          "answer": "Hello\nWorld",
+          "points": 100
+      },
+      {
+          "id": 332,
+          "question": "Which of the following is NOT a valid way to create a dictionary?",
+          "options": ["{'a': 1, 'b': 2}", "dict(a=1, b=2)", "{(1, 2): 'pair'}", "[('a', 1), ('b', 2)]"],
+          "answer": "[('a', 1), ('b', 2)]",
+          "points": 100
+      },
+      {
+          "id": 333,
+          "question": "Which of the following is a valid way to define a multi-line string in Python?",
+          "options": ["Using triple quotes", "Using backslash at the end of each line", "Using parentheses", "All of the above"],
+          "answer": "All of the above",
+          "points": 100
+      },
+      {
+          "id": 334,
+          "question": "Which of the following statements correctly defines a list comprehension?",
+          "options": ["[x for x in range(5)]", "(x for x in range(5))", "{x for x in range(5)}", "None of the above"],
+          "answer": "[x for x in range(5)]",
+          "points": 100
+      },
+      {
+          "id": 335,
+          "question": "What is the output of 'print([1, 2, 3, 4].remove(2))'?",
+          "options": ["[1, 2, 3, 4]", "[1, 3, 4]", "None", "Error"],
+          "answer": "None",
+          "points": 100
+      },
+      {
+          "id": 336,
+          "question": "Which of the following methods returns the value of a dictionary key, or a default value if the key is not found?",
+          "options": ["get()", "fetch()", "default()", "None of the above"],
+          "answer": "get()",
+          "points": 100
+      },
+      {
+          "id": 337,
+          "question": "Which of the following statements is correct for opening a file in binary mode for reading?",
+          "options": ["open('file.txt', 'rb')", "open('file.txt', 'r')", "open('file.txt', 'wb')", "None of the above"],
+          "answer": "open('file.txt', 'rb')",
+          "points": 100
+      },
+      {
+          "id": 338,
+          "question": "Which method is used to remove all items from a list?",
+          "options": ["clear()", "empty()", "delete()", "None of the above"],
+          "answer": "clear()",
+          "points": 100
+      },
+      {
+          "id": 339,
+          "question": "What will be the output of 'print(str([1, 2, 3]))'?",
+          "options": ["'[1, 2, 3]'", "[1, 2, 3]", "Error", "None"],
+          "answer": "'[1, 2, 3]'",
+          "points": 100
+      },
+      {
+          "id": 340,
+          "question": "What will be the output of the following code: 'print([i for i in range(3)] == [0, 1, 2] is [0, 1, 2])'?",
+          "options": ["True", "False", "SyntaxError", "TypeError"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 341,
+          "question": "Given the following code 'x = [0, 1, 2]; y = x; x[1] = 10; print(y)', what will be the output?",
+          "options": ["[0, 1, 2]", "[0, 10, 2]", "Error", "None"],
+          "answer": "[0, 10, 2]",
+          "points": 100
+      },
+      {
+          "id": 342,
+          "question": "Which of the following statements is correct about Python's 'super()' in inheritance?",
+          "options": ["Calls the superclass's method directly", "Calls the superclass's method in the current class's context", "Initializes superclass attributes", "None of the above"],
+          "answer": "Calls the superclass's method in the current class's context",
+          "points": 100
+      },
+      {
+          "id": 343,
+          "question": "What will the following expression return: 'list(filter(None, [0, '', [], {}, 5, 'hello']))'?",
+          "options": ["[0, '', [], {}, 5, 'hello']", "[5, 'hello']", "[5]", "None"],
+          "answer": "[5, 'hello']",
+          "points": 100
+      },
+      {
+          "id": 344,
+          "question": "What is the output of this code: 'def f(x=[]): x.append(1); return x; print(f(), f())'?",
+          "options": ["[1], [1]", "[1], [1, 1]", "Error", "None"],
+          "answer": "[1], [1, 1]",
+          "points": 100
+      },
+      {
+          "id": 345,
+          "question": "What will the following code print: 'x = [1, 2, 3]; y = x[:]; y[0] = 10; print(x)'?",
+          "options": ["[10, 2, 3]", "[1, 2, 3]", "Error", "None"],
+          "answer": "[1, 2, 3]",
+          "points": 100
+      },
+      {
+          "id": 346,
+          "question": "Which of the following is true about the 'nonlocal' keyword?",
+          "options": ["It modifies global variables", "It allows modifying a variable in the parent function", "It limits the scope of the variable", "It raises an exception if the variable is not found"],
+          "answer": "It allows modifying a variable in the parent function",
+          "points": 100
+      },
+      {
+          "id": 347,
+          "question": "Which of the following statements is true about a generator function in Python?",
+          "options": ["It returns an iterator", "It executes only when 'next()' is called", "It remembers its state between executions", "All of the above"],
+          "answer": "All of the above",
+          "points": 100
+      },
+      {
+          "id": 348,
+          "question": "Which of the following statements is true for Python's GIL (Global Interpreter Lock)?",
+          "options": ["It prevents multiple threads from executing Python bytecode at once", "It improves Python's multithreading performance", "It allows parallel execution of Python code", "It is released automatically after each Python statement"],
+          "answer": "It prevents multiple threads from executing Python bytecode at once",
+          "points": 100
+      },
+      {
+          "id": 349,
+          "question": "What is the result of 'print(all([]))'?",
+          "options": ["True", "False", "None", "TypeError"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 350,
+          "question": "What will be the output of 'set([1, 2, 3]) == set([3, 2, 1])'?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 351,
+          "question": "What will the following code output: 'print({True: 'yes', 1: 'no', 1.0: 'maybe'})'?",
+          "options": ["{'yes': True, 'no': 1, 'maybe': 1.0}", "{True: 'maybe'}", "{True: 'yes'}", "Error"],
+          "answer": "{True: 'maybe'}",
+          "points": 100
+      },
+      {
+          "id": 352,
+          "question": "What will be the result of 'list(itertools.product([1, 2], repeat=2))'?",
+          "options": ["[(1, 1), (1, 2), (2, 1), (2, 2)]", "[(1, 2), (2, 1)]", "[(1, 2)]", "Error"],
+          "answer": "[(1, 1), (1, 2), (2, 1), (2, 2)]",
+          "points": 100
+      },
+      {
+          "id": 353,
+          "question": "What will be the output of 'print(bool([0, 0, 0]))'?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 354,
+          "question": "What is the result of 'print({x for x in 'abc'})'?",
+          "options": ["{'a', 'b', 'c'}", "['a', 'b', 'c']", "{'abc'}", "Error"],
+          "answer": "{'a', 'b', 'c'}",
+          "points": 100
+      },
+      {
+          "id": 355,
+          "question": "What will be the result of 'a = {1, 2}; a.add(3); a.update([4, 5]); print(a)'?",
+          "options": ["{1, 2, 3, 4, 5}", "{1, 2, 4, 5}", "{1, 2}", "None"],
+          "answer": "{1, 2, 3, 4, 5}",
+          "points": 100
+      },
+      {
+          "id": 356,
+          "question": "Which of the following built-in functions can be used to iterate over a sequence with index in Python?",
+          "options": ["enumerate()", "map()", "zip()", "filter()"],
+          "answer": "enumerate()",
+          "points": 100
+      },
+      {
+          "id": 357,
+          "question": "What is the result of 'print(next(iter([1, 2, 3])))'?",
+          "options": ["1", "2", "3", "Error"],
+          "answer": "1",
+          "points": 100
+      },
+      {
+          "id": 358,
+          "question": "What will the following code return: 'print(4 * [None])'?",
+          "options": ["[None, None, None, None]", "[None]", "[4]", "Error"],
+          "answer": "[None, None, None, None]",
+          "points": 100
+      },
+      {
+          "id": 359,
+          "question": "What will be the output of 'x = [0]; x += x; print(x)'?",
+          "options": ["[0, 0]", "[0]", "Error", "[[0], [0]]"],
+          "answer": "[0, 0]",
+          "points": 100
+      },
+      {
+          "id": 360,
+          "question": "What will the following code print: 'x = [0]; y = x * 2; y[1] = 1; print(x, y)'?",
+          "options": ["[0] [0, 1]", "[0] [0, 0]", "Error", "None"],
+          "answer": "[0] [0, 1]",
+          "points": 100
+      },
+      {
+          "id": 361,
+          "question": "What is the result of 'print(abs(-1 + 1j))'?",
+          "options": ["1.414", "1", "0", "None"],
+          "answer": "1.414",
+          "points": 100
+      },
+      {
+          "id": 362,
+          "question": "Which of the following is true about Python's 'range' object in Python 3?",
+          "options": ["It generates numbers lazily", "It returns a list of integers", "It only works with positive integers", "It is mutable"],
+          "answer": "It generates numbers lazily",
+          "points": 100
+      },
+      {
+          "id": 363,
+          "question": "What will the following code print: 'print(3 > 2 > 1 == True)'?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 364,
+          "question": "Given 'x = [1, 2, 3]' and 'y = x.copy()', what will the expression 'id(x[0]) == id(y[0])' return?",
+          "options": ["True", "False", "Error", "Depends on Python version"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 365,
+          "question": "What will be the result of the following code: 'a = [[], 1, 2]; b = a[:]; a[0].append(42); print(b)'?",
+          "options": ["[[], 1, 2]", "[[42], 1, 2]", "Error", "None"],
+          "answer": "[[42], 1, 2]",
+          "points": 100
+      },
+      {
+          "id": 366,
+          "question": "Consider the following: 'a = lambda x: (lambda y: (lambda z: x + y + z)); print(a(1)(2)(3))'. What is the output?",
+          "options": ["6", "None", "SyntaxError", "TypeError"],
+          "answer": "6",
+          "points": 100
+      },
+      {
+          "id": 367,
+          "question": "What will be the output of 'class A: def _init_(self): self.x = 1; class B(A): pass; b = B(); print(hasattr(b, 'x'))'?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 368,
+          "question": "What will the following code return: 'a = float('nan'); print(a == a)'?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 369,
+          "question": "What will the following expression return: '[(lambda: i)() for i in range(3)]'?",
+          "options": ["[0, 1, 2]", "[2, 2, 2]", "Error", "[None, None, None]"],
+          "answer": "[2, 2, 2]",
+          "points": 100
+      },
+      {
+          "id": 370,
+          "question": "What will be the output of 'class A: x = 1; class B(A): x = 2; class C(A): pass; print(C().x)'?",
+          "options": ["1", "2", "None", "Error"],
+          "answer": "1",
+          "points": 100
+      },
+      {
+          "id": 371,
+          "question": "Given 'x = set()' and 'x.add([])', what will be the output?",
+          "options": ["[]", "TypeError", "None", "KeyError"],
+          "answer": "TypeError",
+          "points": 100
+      },
+      {
+          "id": 372,
+          "question": "What will be the result of 'a = [1, 2, 3]; b = iter(a); next(b); a.append(4); print(list(b))'?",
+          "options": ["[2, 3]", "[2, 3, 4]", "[1, 2, 3, 4]", "Error"],
+          "answer": "[2, 3]",
+          "points": 100
+      },
+      {
+          "id": 373,
+          "question": "Consider the following: 'import sys; sys.stdout.write('print()');'. What will be printed?",
+          "options": ["print()", "None", "Error", ""],
+          "answer": "print()",
+          "points": 100
+      },
+      {
+          "id": 374,
+          "question": "What is the output of 'def f(x=[]): x.append(1); return x; y = f(); z = f(); z.append(2); print(y, z)'?",
+          "options": ["[1] [1]", "[1, 2] [1]", "[1, 2] [1, 2]", "[1, 1, 2] [1, 1, 2]"],
+          "answer": "[1, 1, 2] [1, 1, 2]",
+          "points": 100
+      },
+      {
+          "id": 375,
+          "question": "What will 'print(0.1 + 0.2 == 0.3)' return?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 376,
+          "question": "What will be the result of 'print((lambda args: args)([1, 2, 3]))'?",
+          "options": ["1", "(1, 2, 3)", "[1, 2, 3]", "Error"],
+          "answer": "(1, 2, 3)",
+          "points": 100
+      },
+      {
+          "id": 377,
+          "question": "What will the following expression return: 'list(zip(range(3), reversed(range(3))))'?",
+          "options": ["[(0, 2), (1, 1), (2, 0)]", "[(0, 0), (1, 1), (2, 2)]", "[(2, 0), (1, 1), (0, 2)]", "Error"],
+          "answer": "[(0, 2), (1, 1), (2, 0)]",
+          "points": 100
+      },
+      {
+          "id": 378,
+          "question": "What will the following code output: 'def f(a, b, *args): return len(args); print(f(1, 2, 3, 4))'?",
+          "options": ["0", "2", "4", "None"],
+          "answer": "2",
+          "points": 100
+      },
+      {
+          "id": 379,
+          "question": "What is the result of the following code: 'def f(x=[]): x += [1]; return x; print(f(), f())'?",
+          "options": ["[1], [1]", "[1], [1, 1]", "[1, 1], [1, 1]", "[1, 1], [1]"],
+          "answer": "[1, 1], [1, 1]",
+          "points": 100
+      },
+      {
+          "id": 380,
+          "question": "What will the following return: 'def f(a, b=[]): b.append(a); return b; print(f(1), f(2), f(3))'?",
+          "options": ["[1] [2] [3]", "[1] [1, 2] [1, 2, 3]", "[1, 2, 3] [1, 2, 3] [1, 2, 3]", "[1] [1, 2] [3]"],
+          "answer": "[1, 2, 3] [1, 2, 3] [1, 2, 3]",
+          "points": 100
+      },
+      {
+          "id": 381,
+          "question": "What will be the result of 'x = (i for i in range(3)); y = (i for i in range(3)); print(list(zip(x, y)))'?",
+          "options": ["[(0, 0), (1, 1), (2, 2)]", "[(0, 0), (1, 1)]", "Error", "None"],
+          "answer": "[(0, 0), (1, 1)]",
+          "points": 100
+      },
+      {
+          "id": 382,
+          "question": "What will the following code output: 'x = {1, 2, 3}; y = frozenset(x); x.add(4); print(y)'?",
+          "options": ["{1, 2, 3}", "{1, 2, 3, 4}", "frozenset({1, 2, 3})", "Error"],
+          "answer": "frozenset({1, 2, 3})",
+          "points": 100
+      },
+      {
+          "id": 383,
+          "question": "What will be the result of 'a = [1, 2, 3]; b = a.pop(0); print(a)'?",
+          "options": ["[1, 2]", "[2, 3]", "Error", "None"],
+          "answer": "[2, 3]",
+          "points": 100
+      },
+      {
+          "id": 384,
+          "question": "Given the following function definition, what will 'f()' return? 'def f(a=5, b=a + 1): return a, b'",
+          "options": ["(5, 6)", "Error", "(5, None)", "(None, None)"],
+          "answer": "Error",
+          "points": 100
+      },
+      {
+          "id": 385,
+          "question": "What will 'print({(x, y): x*y for x in range(2) for y in range(2)})' return?",
+          "options": ["{(0, 0): 0, (0, 1): 0, (1, 0): 0, (1, 1): 1}", "Error", "None", "{(0, 0): 0, (1, 1): 1}"],
+          "answer": "{(0, 0): 0, (0, 1): 0, (1, 0): 0, (1, 1): 1}",
+          "points": 100
+      },
+      {
+          "id": 386,
+          "question": "What is the result of 'print([[0]*2]*2)'?",
+          "options": ["[[0, 0], [0, 0]]", "[[0], [0]]", "Error", "None"],
+          "answer": "[[0, 0], [0, 0]]",
+          "points": 100
+      },
+      {
+          "id": 387,
+          "question": "What will be the output of 'a = {1, 2}; b = a; a.add(3); print(a is b)'?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 388,
+          "question": "What will be the output of 'print(3 and 2 or 1)'?",
+          "options": ["2", "1", "None", "Error"],
+          "answer": "2",
+          "points": 100
+      },
+      {
+          "id": 389,
+          "question": "What will the following expression return: 'print(1 < 2 > 3 < 4)'?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 390,
+          "question": "What will be the output of 'x = [1, 2]; y = x * 2; y[2] = 3; print(x, y)'?",
+          "options": ["[1, 2] [1, 2, 3]", "[1, 2] [1, 2, 1, 3]", "Error", "None"],
+          "answer": "[1, 2] [1, 2, 1, 3]",
+          "points": 100
+      },
+      {
+          "id": 391,
+          "question": "What will the following code return: 'a = {1: None}; print(a[1] is None)'?",
+          "options": ["True", "False", "Error", "None"],
+          "answer": "True",
+          "points": 100
+      },
+      {
+          "id": 392,
+          "question": "What will the following code return: 'a = {1: 2}; b = {1: 2}; print(a is b)'?",
+          "options": ["True", "False", "None", "Error"],
+          "answer": "False",
+          "points": 100
+      },
+      {
+          "id": 393,
+          "question": "What will be the output of 'def f(a, b=[]): b.append(a); return b; print(f(1), f(2, []), f(3))'?",
+          "options": ["([1], [2], [3])", "([1], [2], [1, 3])", "([1], [2], [1, 2, 3])", "Error"],
+          "answer": "([1], [2], [1, 3])",
+          "points": 100
+      },
+      {
+          "id": 394,
+          "question": "What is the result of the following code? 'x = [1, 2, 3]; y = x; y += [4]; print(x, y)'",
+          "options": ["[1, 2, 3], [1, 2, 3, 4]", "[1, 2, 3], [4]", "[1, 2, 3, 4], [1, 2, 3, 4]", "Error"],
+          "answer": "[1, 2, 3, 4], [1, 2, 3, 4]",
+          "points": 100
+      },
+      {
+          "id": 395,
+          "question": "What will be the output of the code below? 'class A: x = 1; def _init_(self): self.y = 2; a = A(); print(hasattr(a, 'x'), hasattr(a, 'y'))'",
+          "options": ["True, True", "False, True", "True, False", "False, False"],
+          "answer": "True, True",
+          "points": 100
+      },
+      {
+          "id": 396,
+          "question": "What will the code 'x = (i**2 for i in range(3)); y = (i+1 for i in x); print(list(y))' output?",
+          "options": ["[1, 2, 3]", "[2, 5, 10]", "[2, 3, 4]", "Error"],
+          "answer": "[2, 5, 10]",
+          "points": 100
+      },
+      {
+          "id": 397,
+          "question": "What will be the result of the following code? 'class A: pass; class B(A): pass; b = B(); print(isinstance(b, A), isinstance(b, B))'",
+          "options": ["True, True", "False, False", "True, False", "False, True"],
+          "answer": "True, True",
+          "points": 100
+      },
+      {
+          "id": 398,
+          "question": "What will 'print(sum([i**2 for i in range(4)]))' return?",
+          "options": ["14", "16", "10", "Error"],
+          "answer": "14",
+          "points": 100
+      },
+      {
+          "id": 399,
+          "question": "What is the result of 'a = (i for i in range(3)); next(a); print(next(a), next(a))'?",
+          "options": ["1, 2", "0, 1", "Error", "StopIteration"],
+          "answer": "1, 2",
+          "points": 100
+      },
+      {
+          "id": 400,
+          "question": "What will 'a = {True: 'yes', 1: 'no', 1.0: 'maybe'}; print(a[1])' return?",
+          "options": ["'yes'", "'no'", "'maybe'", "Error"],
+          "answer": "'maybe'",
+          "points": 100
+      },
+    {
+      "id": 401,
+      "question": "What will be the output of the following code snippet: print(tuple([1, 2, 3])[2]) ?",
+      "options": ["[2, 2, 3]", "(2, 2, 3)", "(1, 2, 3)", "Error"],
+      "answer": "Error",
+      "points": 100
+    },
+    {
+      "id": 402,
+      "question": "Which of the following types of loops are not supported in Python?",
+      "options": ["for", "while", "do-while", "None of the above"],   
+      "answer": "do-while",
+      "points": 100
+    },
+    {
+      "id": 403,
+      "question": "What will be the output of the following code snippet: print(len({1, 3, 5} + {2, 4, 6})) ?",
+      "options": ["3", "6", "0", "Error"],
+      "answer": "Error",
+      "points": 100
+    },
+    {
+      "id": 404,
+      "question": "What will be the output of the following code snippet: print({1, 2, 3, 4, 5} ^ {2, 4, 6}) ?",
+      "options": ["{1, 2, 3, 4, 5}", "{1, 3, 5, 6}", "{2, 4}", "None of the above"],
+      "answer": "{1, 3, 5, 6}",
+      "points": 100
+    },
+    {
+      "id": 405,
+      "question": "Which of the following concepts is not a part of Python?",
+      "options": ["Pointers", "Loops", "Dynamic Typing", "None of the above"],
+      "answer": "Pointers",
+      "points": 100
+    },
+    {
+      "id": 406,
+      "question": "Why are variable names starting with an underscore discouraged in Python?",
+      "options": ["To identify the variable", "It confuses the interpreter", "It indicates a private variable of a class", "None of these"],
+      "answer": "It indicates a private variable of a class",
+      "points": 100
+    },
+    {
+      "id": 407,
+      "question": "Which one of the following has the same precedence level?",
+      "options": ["Division, Power and Addition", "Division and Multiplication", "Subtraction and Division", "Power and Division"],
+      "answer": "Division and Multiplication",
+      "points": 100
+    },
+    {
+      "id": 408,
+      "question": "Which one of the following has the highest precedence in the expression?",
+      "options": ["Division", "Subtraction", "Power", "Parentheses"],
+      "answer": "Parentheses",
+      "points": 100
+    },
+    {
+      "id": 409,
+      "question": "What will be the output of the following code snippet: print(\"mozilla\"[5:]) ?",
+      "options": ["lla", "zilla", "la", "mozilla"],
+      "answer": "la",
+      "points": 100
+    },
+    {
+      "id": 410,
+      "question": "What will be the output of the following code snippet?\n```python\nprint(0xA + 0xB + 0xC)\n```",
+      "options": ["33", "63", "0xA + 0xB + 0xC", "None of these"],
+      "answer": "33",
+      "points": 100
+    },
+    {
+      "id": 411,
+      "question": "What error will occur when you execute the following code?\n```python\nMANGO = APPLE\n```",
+      "options": ["NameError", "SyntaxError", "TypeError", "ValueError"],
+      "answer": "NameError",
+      "points": 100
+    },
+    {
+      "id": 412,
+      "question": "What happens when '2' == 2 is executed?",
+      "options": ["False", "True", "ValueError occurs", "TypeError occurs"],
+      "answer": "True",
+      "points": 100
+    },
+    {
+      "id": 413,
+      "question": "Which of the following arithmetic operators cannot be used with strings in Python?",
+      "options": ["+", "*", "-", "All of the mentioned"],
+      "answer": "-",
+      "points": 100
+    },
+    {
+      "id": 414,
+      "question": "What will be the output of the following code snippet?\n```python\nprint(max('zoo 145 com'))\n```",
+      "options": ["145", "122", "a", "z"],
+      "answer": "z",
+      "points": 100
+    },
+    {
+      "id": 415,
+      "question": "Which of the following objects are present in the function header in Python?",
+      "options": ["Function name and Parameters", "Only function name", "Only parameters", "None of the above"],
+      "answer": "Function name and Parameters",
+      "points": 100
+    },
+    {
+      "id": 416,
+      "question": "Which of the following objects are present in the function header in Python?",
+      "options": ["Function name and Parameters", "Only function name", "Only parameters", "None of the above"],
+      "answer": "Function name and Parameters",
+      "points": 100
+    },
+    {
+      "id": 417,
+      "question": "The command used to start Python from the command prompt is:",
+      "options": ["execute python", "python", "py", "Both 2 and 3"],
+      "answer": "Both 2 and 3",
+      "points": 100
+    },
+    {
+      "id": 418,
+      "question": "What will be the output of the following command in Python: (r\"\\nhello\") ?",
+      "options": ["hello", "new line and hello", "\\nhello", "Error"],
+      "answer": "\\nhello",
+      "points": 100
+    },
+    {
+      "id": 419,
+      "question": "What will be the result of the following command in Python language:\n```python\nround(0.4) - round(-0.5)\n```",
+      "options": ["0", "1", "2", "-1"],
+      "answer": "0",
+      "points": 100
+    },
+    {
+      "id": 420,
+      "question": "What will be the output of the following command in Python?\n```python\nprint(min('')\n```",
+      "options": ["e", "a blank space character", "w", "None of the above"],
+      "answer": "a blank space character",
+      "points": 100
+    },
+    {
+      "id": 421,
+      "question": "Suppose you are given a set (s1={1,2,3}). What is the output for the code:\n```python\n2 * s1\n```",
+      "options": ["(1,1,2,2,3,3)", "[1,1,2,2,3,3]", "None", "(1,2,3,1,2,3)"],
+      "answer": "None",
+      "points": 100
+    },
+    {
+      "id": 422,
+      "question": "What will be the output of the following Python expression if x=56.236?\n```python\nprint('%.2f' % x)\n```",
+      "options": ["56.236", "56.23", "56.0000", "56.24"],
+      "answer": "56.24",
+      "points": 100
+    },
+    {
+      "id": 423,
+      "question": "Which version of Python removed the print statement?",
+      "options": ["Python 1.x", "Python 2.x", "Python 3.x", "None of the above"],
+      "answer": "Python 3.x",
+      "points": 100
+    },
+    {
+      "id": 424,
+      "question": "Identify the error in this code:\n```python\nx = [1, 2, 3]\nprint(x)\n```",
+      "options": ["Syntax error in variable x", "Missing parenthesis in print", "Missing bracket in x", "No error"],
+      "answer": "No error",
+      "points": 100
+    },
+    {
+      "id": 425,
+      "question": "What does the `continue` statement do inside a loop?",
+      "options": ["Pauses the loop", "Stops the loop", "Skips the current iteration", "Exits the program"],
+      "answer": "Skips the current iteration",
+      "points": 100
+    },
+    {
+      "id": 426,
+      "question": "What is the difference between a for loop and a while loop in Python?",
+      "options": ["for is used for fixed iterations", "while is faster than for", "for can't use conditional statements", "There is no difference"],
+      "answer": "for is used for fixed iterations",
+      "points": 100
+    },
+    {
+      "id": 427,
+      "question": "Identify the error in the following Python code:",
+      "options": [
+        "Line error with the list declaration",
+        "Line error with the append() method",
+        "No error",
+        "Lists cannot contain integers"
+      ],
+      "answer": "Syntax error with the list declaration",
+      "points": 100
+    },
+    {
+      "id": 428,
+      "question": "What happens if you try to access a non-existent key 'k' in a dictionary 'd' using d[k]?",
+      "options": ["Returns None", "Returns an empty string", "Raises a KeyError", "Creates a new key 'k'"],
+      "answer": "Raises a KeyError",
+      "points": 100
+    },
+    {
+      "id": 429,
+      "question": "How can you remove a key-value pair from a dictionary?",
+      "options": ["Using the del statement", "Using the remove() method", "Using the pop() method", "Both A and C"],
+      "answer": "Both A and C",
+      "points": 100
+    },
+    {
+      "id": 430,
+      "question": "The speed of a boat in upstream is 5 km/hr. If the speed of the boat against the stream is 3 km/hr, what is the speed of the stream?",
+      "options": ["1.5 km/hr", "2 km/hr", "2.5 km/hr", "1 km/hr"],
+      "answer": "1.5 km/hr",
+      "points": 100
+    },
+    {
+      "id": 431,
+      "question": "What is the probability of getting an even number when a dice is rolled?",
+      "options": ["1/5", "1/2", "1/3", "1/4"],
+      "answer": "1/2",
+      "points": 100
+    },
+    {
+      "id": 432,
+      "question": "If 15 men can reap the crops of a field in 28 days, in how many days will 5 men reap it?",
+      "options": ["50 days", "60 days", "84 days", "9.333 days"],
+      "answer": "84 days",
+      "points": 100
+    },
+    {
+      "id": 433,
+      "question": "What is the correct way to start a 'for' loop?",
+      "options": ["for i in range(10):", "loop i to 10", "for(i=0; i<10; i++)", "None of the above"],
+      "answer": "for i in range(10):",
+      "points": 100
+    },
+    {
+      "id": 434,
+      "question": "What does a 'variable' store?",
+      "options": ["Functions", "Data values", "Loops", "Operators"],
+      "answer": "Data values",
+      "points": 100
+    },
+    {
+      "id": 435,
+      "question": "Which of the following loops is best suited when you know the number of iterations?",
+      "options": ["for loop", "while loop", "do-while loop", "None of the above"],
+      "answer": "for loop",
+      "points": 100
+    },
+    {
+      "id": 436,
+      "question": "If 3 cats catch 3 mice in 3 minutes, how long will it take 100 cats to catch 100 mice?",
+      "options": ["3 minutes", "100 minutes", "10 minutes", "1 minute"],
+      "answer": "3 minutes",
+      "points": 100
+    },
+    {
+      "id": 437,
+      "question": "If you add all the numbers on a phone keypad, what do you get?",
+      "options": ["95", "100", "45", "55"],
+      "answer": "45",
+      "points": 100
+    },
+    {
+      "id": 438,
+      "question": "Mary's father has 5 daughters: Nana, Nene, Nini, Nono, and ____?",
+      "options": ["Mary", "Nunu", "Nana", "None of these"],
+      "answer": "Mary",
+      "points": 100
+    },
+    {
+      "id": 439,
+      "question": "How many times can you subtract 10 from 100?",
+      "options": ["Once", "10 times", "9 times", "5 times"],
+      "answer": "Once",
+      "points": 100
+    },
+    {
+      "id": 440,
+      "question": "What number is halfway between 1 and 9?",
+      "options": ["4", "5", "6", "7"],
+      "answer": "5",
+      "points": 100
+    },
+    {
+      "id": 441,
+      "question": "Which month at least has 28 days?",
+      "options": ["February", "March", "All of them", "None of these"],
+      "answer": "All of them",
+      "points": 100
+    },
+    {
+      "id": 442,
+      "question": "How many feet are in a yard?",
+      "options": ["1", "2", "3", "4"],
+      "answer": "3",
+      "points": 100
+    },
+    {
+      "id": 443,
+      "question": "If a farmer has 10 goats and all but 3 die, how many goats does he have left?",
+      "options": ["10", "7", "3", "None"],
+      "answer": "3",
+      "points": 100
+    },
+
+
 ]
 
 
