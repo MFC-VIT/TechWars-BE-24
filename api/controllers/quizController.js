@@ -169,7 +169,7 @@ export const verifyAnswer = async (req, res, next)=>{
       const lobby = await lobbyModel.findById(team.lobby_id)
       lobby.teams = lobby.teams.map(teamObj=>{
         if (teamObj.teamId.toString() == team._id.toString()){
-          teamObj.score = team.score;
+          teamObj.score += ques.points;
         }
         return teamObj;
       })
