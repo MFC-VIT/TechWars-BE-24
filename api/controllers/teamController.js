@@ -100,13 +100,12 @@ export const getAllTeams = async (req, res, next)=>{
     for (const teamObj of lobby.teams){
       const team = await teamModel.findById(teamObj.teamId);
       const { 
-        name, 
+        name,
         territories, 
         state, 
-        areQuestionsSeeded, 
-        score 
+        areQuestionsSeeded,  
       } = team;
-      teamsInLobby.push({ name, score, state, territories, areQuestionsSeeded });
+      teamsInLobby.push({ name, score: teamObj.score, state, territories, areQuestionsSeeded });
       teamsInLobby.sort((team1, team2)=>team2.score - team1.score);
     } 
     return res.status(200).json({
