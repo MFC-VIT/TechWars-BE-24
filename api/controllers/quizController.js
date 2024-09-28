@@ -65,7 +65,7 @@ export const endQuiz = async (req, res, next)=>{
 export const startQuiz = async (req, res, next)=>{
   const teamId = req.teamId;
   const lobbyId = req.lobbyId;
-  const quesCount = parseInt(req.query.questions) || 5;
+  const quesCount = parseInt(req.query.questions) || 6;
   try {
     const team = await teamModel.findOne({
       _id: teamId,
@@ -87,6 +87,7 @@ export const startQuiz = async (req, res, next)=>{
       const attemptingQuestions = team.questions.filter((question)=>(
         question.state === questionStates.attempting
       ));
+      // if (attemptingQuestions.length == 0){}
       return res.status(200).json({
         questions: attemptingQuestions.map(({ id, question, options })=>({ id, question, options })),
         count: attemptingQuestions.length,
