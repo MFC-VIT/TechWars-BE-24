@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Node.js App Service
+  app:
+    container_name: node-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://mozillavit:vnB9N6hwtD3k10YR@cluster0.wccal.mongodb.net/TW?retryWrites=true&w=majority&appName=Cluster0
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    command: npm run dev
+
+  # MongoDB Service
+  db:
+    container_name: mongodb
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+
+  # Seed Database Service (optional)
+  seed:
+    container_name: seed-db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://mozillavit:vnB9N6hwtD3k10YR@cluster0.wccal.mongodb.net/TW?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - db
+    command: npm run seed-db
