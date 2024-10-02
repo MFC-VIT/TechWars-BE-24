@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import "dotenv/config"
-import lobbyModel from "./api/models/lobbyModel.js";
-import { connectDB } from "./api/db/connectDB.js";
-import teamModel from "./api/models/teamModel.js";
+import lobbyModel from "../api/models/lobbyModel.js";
+import { connectDB } from "../api/db/connectDB.js";
+import teamModel from "../api/models/teamModel.js";
 
 const teams = [
   {

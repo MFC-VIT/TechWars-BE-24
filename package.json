@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "npx nodemon index.js",
     "start": "node index.js",
-    "seed-db": "node ./api/db/seedDb.js"
+    "seed-ques": "node ./api/db/seedDb.js",
+    "seed-teams": "node ./scripts/teams.js",
+    "seed-planets": "node ./scripts/territories.js",
+    "seed-db": "npm run seed-ques && npm run seed-teams && npm run seed-planets",
+    "result": "node ./scripts/territoriesCaptured.js"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +22,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.3",
-    "zod": "^3.23.8"
+    "mongoose": "^8.5.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

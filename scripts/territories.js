@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { connectDB } from "./api/db/connectDB.js"
-import territoryModel from "./api/models/territoryModel.js";
+import { connectDB } from "../api/db/connectDB.js"
+import territoryModel from "../api/models/territoryModel.js";
 import "dotenv/config"
 
 const territories = [
@@ -17,22 +17,10 @@ const territories = [
     "alias": "sjt_foodys"
   },
   {
-    "name": "ALLMART GATE",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "allmart_gate"
-  },
-  {
     "name": "FOODYS",
     "requiredScore": 0,
     "isCaptured": false,
     "alias": "foodys"
-  },
-  {
-    "name": "BASKETBALL COURT (IN FRONT OF TT)",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "basketball_court_tt"
   },
   {
     "name": "GDN",
@@ -45,12 +33,6 @@ const territories = [
     "requiredScore": 0,
     "isCaptured": false,
     "alias": "tt_main_gate"
-  },
-  {
-    "name": "TT ANNEXE",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "tt_annexe"
   },
   {
     "name": "SJT ANNEXE",
@@ -87,12 +69,6 @@ const territories = [
     "requiredScore": 0,
     "isCaptured": false,
     "alias": "architecture_lawn"
-  },
-  {
-    "name": "SMV FRONT GATE",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "smv_front_gate"
   },
   {
     "name": "GREENOS",
@@ -137,12 +113,6 @@ const territories = [
     "alias": "madras_coffee_shop"
   },
   {
-    "name": "ARCHITECTURE BUS PARKING",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "architecture_bus_parking"
-  },
-  {
     "name": "TENNIS COURT",
     "requiredScore": 0,
     "isCaptured": false,
@@ -171,12 +141,6 @@ const territories = [
     "requiredScore": 0,
     "isCaptured": false,
     "alias": "prp_main_gate"
-  },
-  {
-    "name": "SJT GROUND",
-    "requiredScore": 0,
-    "isCaptured": false,
-    "alias": "sjt_ground"
   },
   {
     "name": "ORGAN DONOR BUILDING",
